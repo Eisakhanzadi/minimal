@@ -1,0 +1,4 @@
+.active-page{
+  background: var(--pagination-background) !important;
+  border-bottom: 2px solid  var(--pagination-border-active) !important;
+}

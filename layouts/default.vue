@@ -1,0 +1,17 @@
+<script setup lang="ts">
+
+</script>
+
+<template>
+  <div>
+    <Header></Header>
+    <main class="max-w-[2500px] mx-auto">
+      <slot/>
+    </main>
+    <Footer></Footer>
+  </div>
+</template>
+
+<style scoped>
+
+</style>

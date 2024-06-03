@@ -1,0 +1,174 @@
+@import "varibles-breadcrumb";
+@import "productPage";
+:root {
+    --color-default:#000;
+    --background-home-baner: #F9F2FA;
+    --home-banner-title-color: #000;
+    --home-banner-sub-title-color: #AE7BB6;
+    --home-banner-text-color: #AE7BB6;
+    --home-banner-border-button: #AE7BB6;
+    --home-banner-text-button: #AE7BB6;
+}
+    /* start category swiper style*/
+:root{
+    --home-swiper-category-color-title:#000;
+    --home-swiper-category-font-family-title:'yekan-bold';
+    --home-swiper-category-font-size-title:1.2rem;
+    --home-swiper-category-font-size-title-responsive:0.7rem;
+
+    --home-swiper-category-font-weight-title:bold;
+    --home-swiper-category-color-text:rgba(0,0,0,0.6);
+    --home-swiper-category-font-size-text:1rem;
+    --home-swiper-category-font-size-text-responsive:0.6rem;
+    --home-swiper-category-font-family-text:'yekan-light';
+}
+
+/*start offer home*/
+/*title*/
+:root{
+    --home-filter-offer-color-title:#000;
+    --home-filter-offer-font-size-title:24px;
+    --home-filter-offer-font-weight-title:bold;
+    --home-filter-offer-font-family-title:'yekan-bold';
+    --home-filter-offer-line-height-title:30px;
+
+    --home-filter-offer-font-size-title-resposive:15px;
+}
+/*filter*/
+:root{
+    --home-filter-offer-color-item:#000;
+    --home-filter-offer-font-size-item:14px;
+    --home-filter-offer-font-weight-item:bold;
+    --home-filter-offer-font-family-item:'yekan-bold';
+    --home-filter-offer-color-border-item-active:#AE7BB6;
+    --home-filter-offer-color-item-active:#AE7BB6;
+
+    --home-filter-offer-font-size-item-responsive:9px;
+    --home-filter-offer-font-family-item-responsive:'yekan-regular';
+}
+/*card*/
+/*title*/
+:root{
+    --home-offer-card-color-title:#000;
+    --home-offer-card-font-size-title:14px;
+    --home-offer-card-font-weight-title:bold;
+    --home-offer-card-font-family-title:'yekan-regular';
+}
+/*text*/
+:root{
+    --home-offer-card-color-text:#606060;
+    --home-offer-card-font-size-text:12px;
+    --home-offer-card-font-family-text:'yekan-regular';
+}
+
+
+/*feedback swiper*/
+
+:root{
+    --home-feedback-card-size:70%;
+    --home-feedback-background-color:#f4f4f4;
+    --home-feedback-title-color:#000;
+    --home-feedback-title-font-size:16px;
+    --home-feedback-title-font-size-responsive:6px;
+    --home-feedback-title-font-family:'yekan-bold';
+    --home-feedback-title-font-weight:bold;
+    --home-feedback-area-color:#606060;
+    --home-feedback-area-font-size:14px;
+    --home-feedback-area-font-size-responsive:6px;
+    --home-feedback-area-line-height-responsive:14px;
+    --home-feedback-area-font-family:'yekan-regular';
+    --home-feedback-area-font-weight:normal;
+    --home-feedback-text-color:#000;
+    --home-feedback-text-font-size:16px;
+    --home-feedback-text-font-size-responsive:9px;
+    --home-feedback-text-font-family:'yekan-regular';
+    --home-feedback-text-font-weight:normal;
+    --home-feedback-title-line-height:30px;
+}
+
+/*new products*/
+
+:root{
+    --home-new-products-title-color:#000;
+    --home-new-products-title-font-size:32px;
+    --home-new-products-title-font-size-responsive:15px;
+    --home-new-products-title-font-family:'yekan-bold';
+    --home-new-products-title-font-weight:bold;
+    --home-new-products-text-color:#000;
+    --home-new-products-text-font-size:12px;
+    --home-new-products-text-font-size-responsive:8px;
+    --home-new-products-text-font-family:'yekan-regular';
+    --home-new-products-text-font-weight:normal;
+    --home-new-products-text-line-height:30px;
+}
+/*weblog*/
+:root{
+    --home-weblog-background-color:#f4f4f4;
+    --home-weblog-width:60%;
+    --home-weblog-title-color:#000;
+    --home-weblog-title-font-size:32px;
+    --home-weblog-title-font-family:'yekan-bold';
+    --home-weblog-title-font-weight:bold;
+    --home-weblog-sub-title-color:#606060;
+    --home-weblog-sub-title-font-size:12px;
+    --home-weblog-sub-title-font-family:'yekan-regular';
+    --home-weblog-sub-title-font-weight:normal;
+    --home-weblog-item-title-color:#000;
+    --home-weblog-item-title-font-size:24px;
+    --home-weblog-item-title-font-family:'yekan-bold';
+    --home-weblog-item-title-font-weight:bold;
+    --home-weblog-info-color: rgba(96, 96, 96, 0.7);
+    --home-weblog-info-font-size:10.5px;
+    --home-weblog-info-font-family:'yekan-regular';
+    --home-weblog-info-font-weight:normal;
+    --home-weblog-text-color:#000;
+    --home-weblog-text-font-size:12px;
+    --home-weblog-text-font-family:'yekan-regular';
+    --home-weblog-text-font-weight:normal;
+    --home-weblog-button-color:#000;
+    --home-weblog-button-font-size:13px;
+    --home-weblog-button-font-family:'yekan-regular';
+    --home-weblog-button-font-weight:normal;
+    --home-weblog-button-backgroun-hover:#AE7BB6;
+}
+/*footer*/
+:root{
+    --home-brands-outline-border-color: 1px solid #c0c0c0;
+    --home-brands-border-color:#c0c0c0;
+    --home-brands-border-radius:25px;
+    --home-brands-border-width:2px;
+}
+/*footer*/
+:root{
+    --footer-title-font-weight-bold: 700;
+    --footer-background-color:#F8F2F9;
+    --footer-content-background-color:#fff;
+    --footer-icon-color:#AE7BB6;
+    --footer-title-color:#161616;
+    --footer-title-font-size:15px;
+    --footer-title-line-height:30px;
+    --footer-title-font-family:'yekan-regular';
+    --footer-title-font-weight:normal;
+    --footer-nav-title-color:#000;
+    --footer-nav-title-font-size: 16px;
+    --footer-nav-title-font-family:'yekan-bold';
+    --footer-nav-title-font-weight:normal;
+    --footer-nav-item-info-color:#000;
+    --footer-nav-item-info-font-size:14px;
+    --footer-nav-item-info-font-family:'yekan-regular';
+    --footer-nav-item-info-font-weight:normal;
+    --footer-alert-title-font-size:13px;
+    --footer-alert-title-color:#AE7BB6;
+    --footer-alert-title-font-family:'yekan-regular';
+    --footer-make-title-font-size:13px;
+    --footer-make-title-color:#AE7BB6;
+    --footer-make-title-font-family:'yekan-regular';
+    /*responsive*/
+    --footer-nav-title-font-size-responsive: 11px;
+    --footer-nav-item-info-font-size-responsive:9px;
+    --footer-alert-title-font-size-responsive:7px;
+    --footer-make-title-font-size-responsive:7px;
+
+
+
+}
