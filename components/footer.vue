@@ -113,14 +113,14 @@ function scroll(){
         </div>
       </div>
       <div class="footer-body px-10 pb-3 pt-5 md:pt-10 ">
-        <div class="nav relative grid grid-cols-12 gap-y-7 md:gap-0 items-center ">
+        <div class="nav relative grid grid-cols-12 gap-y-7 md:gap-0 items-center  ">
           <div class="popular-product col-span-6 md:col-span-2  flex flex-col gap-2 md:gap-5">
             <div class="popular-title">
               <h4>محصولات پرطرفدار</h4>
             </div>
             <ul class="nav flex flex-col gap-2">
               <li class="nav-item flex items-baseline gap-1.5" v-for="(item , index) in footer.popularProduct"
-                  :key="footer">
+                  :key="index">
                 <nuxt-link :to="item.url" class="nav-link">{{ item.name }}</nuxt-link>
               </li>
             </ul>
@@ -192,14 +192,14 @@ function scroll(){
             <figure><img src="/image/footer/Rectangle%2045%20(1).png" class="w-full" alt=""></figure>
           </div>
           <div class="icon-top w-fit h-fit absolute left-0 bottom-[-10%] lg:right-7 lg:top-[-15%]  ">
-            <button class=" lg:px-5 lg:py-2 lg:pt-3" ref="scrollTo" @click ="scroll">
+            <button class=" lg:px-5 lg:py-2 lg:pt-3 " ref="scrollTo" @click ="scroll">
               <icons-arrow/>
             </button>
           </div>
         </div>
         <div class="footer-end flex justify-between border-t mt-5 py-4">
           <div class="roles"><span>تمامی حقوق مادی و معنوی برای مجموعه مینیمال محفوظ میباشد </span></div>
-          <div class="creator"><span>تهیه شده در شرکت شتاب</span></div>
+          <div class="creator"><span>طراحی شده توسط گروه شتاب</span></div>
         </div>
       </div>
     </div>

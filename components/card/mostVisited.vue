@@ -10,7 +10,7 @@ const props = defineProps(['data' , 'count'])
   </div>
   <div class="body col-span-8">
     <div class="category flex items-center gap-1.5"><h5>{{data.category}}</h5></div>
-    <div class="title"><h4>{{data.title}}</h4></div>
+    <nuxt-link :to="data.url" class="title"><h4>{{data.title}}</h4></nuxt-link>
   </div>
 </div>
 </template>

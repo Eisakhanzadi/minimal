@@ -41,7 +41,7 @@ function show() {
 
 .theme {
   color: #555555;
-  padding: 16px 20px;
+  padding: 2px 20px;
   margin-top: 10px;
 }
 

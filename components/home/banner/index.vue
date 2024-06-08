@@ -1,5 +1,6 @@
 <template>
   <swiper
+
       :slidesPerView="1"
       :loop="true"
       :spaceBetween="10"
@@ -10,9 +11,15 @@
       :pagination="{
       clickable: true,
     }"
-      :modules="[Pagination]"
+      :modules="[]"
       class="mySwiper "
   >
+    <swiper-slide >
+      <img src="/public/image/home/banner.png" class="w-full" alt="">
+    </swiper-slide>
+    <swiper-slide >
+      <img src="/public/image/home/banner.png" class="w-full" alt="">
+    </swiper-slide>
     <swiper-slide >
       <img src="/public/image/home/banner.png" class="w-full" alt="">
     </swiper-slide>

@@ -54,8 +54,6 @@ function handleActive(index) {
 }
 
 .productPage {
-  //gap: 40px;
-  //justify-content: space-evenly;
   align-items: center;
   li {
     &:first-child{
@@ -69,13 +67,12 @@ function handleActive(index) {
     font-family: var(--products-filter-font-family-item);
     font-weight: var(--products-filter-font-weight-item);
     color: var(--products-filter-color-item);
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
       &:first-child{
-        font-size: 8px;
+        font-size: 12px;
         line-height: 10px;
       }
-      font-size: var(--products-filter--font-size-item-responsive);
-      font-family: var(--products-filter-font-family-item-responsive);
+      font-size: 10px;
     }
     &.nav-list{
       position: relative;

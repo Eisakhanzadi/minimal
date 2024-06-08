@@ -6,41 +6,36 @@ const showList = ref(false)
 
 function show() {
   parent.value.classList.toggle('show')
+
   showList.value = !showList.value
 }
 </script>
 
 <template>
-  <li class="w-full  py-3 father navbar-mobile-item  relative mt-3 "
-      :class="{ border : props.theme === 'parent' , theme:props.theme===true , borderNone:!props.data.sub}"
+  <div class="w-full  py-3 father navbar-mobile-item  relative mt-3 "
+      :class="{ theme:props.theme===true , borderNone:!props.data.sub}"
       ref="parent">
     <div class="flex  justify-between w-full">
       <nuxtLink :to="props.data.link">
         <span>{{ props.data.name }}</span>
       </nuxtLink>
-      <div class="navbar-mobile-icon">
+      <div class="navbar-mobile-icon bg-gray-300 cursor-pointer">
         <span v-if="props.data.sub" class="icon" @click="show"></span>
       </div>
     </div>
     <div class="sub-menu overflow-hidden" v-if="props.data.sub " ref="child">
-      <ul class="nav w-full overflow-hidden">
+      <div class="nav w-full overflow-hidden">
         <transition-group name="transition">
           <navbar-mobile v-if="props.data.sub && showList" v-for="(item , index) in props.data.sub" :key="index" :data="item"
                   :theme="props.data.sub.length ? true : false"/>
         </transition-group>
-      </ul>
+      </div>
     </div>
-  </li>
+  </div>
 </template>
 
 <style scoped lang="scss">
-.border {
-  border: 0;
-  border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
-}
-
 .theme {
-  color: #555555;
   padding: 16px 20px;
   margin-top: 10px;
 }
@@ -49,18 +44,20 @@ function show() {
   border: none;
 }
 
-li > div > div > span.icon:after {
+div > div > div > span.icon:after {
   position: absolute;
   content: "+";
   left: 0;
+  top: 5px;
   font-size: 20px;
+  padding: 5px 10px;
 }
 
 .sub-menu {
   transition: 0.5s;
 }
 
-li.show > div > div > span.icon:after {
+div.show > div > div > span.icon:after {
   content: "-";
 }
 
@@ -76,4 +73,5 @@ li.show > div > div > span.icon:after {
   transform: translateX(20%);
   opacity: 0;
 }
+
 </style>

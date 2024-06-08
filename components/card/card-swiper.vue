@@ -18,9 +18,9 @@ const {data} = props
           }}</span></div>
       </div>
       <div class="card-text text-justify"><p>{{ data.text }}</p></div>
-      <div class="more  ms-auto mt-auto lg:mb-3">
+      <nuxt-link :to="data.url" class="more  ms-auto mt-auto lg:mb-3">
         <button>مشاهده بیشتر</button>
-      </div>
+      </nuxt-link>
     </div>
   </div>
 </template>

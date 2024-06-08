@@ -5,9 +5,10 @@ const props = defineProps([
   'filter'
 ])
 const data = [
+
     'فیلتر',
-    'دسته بندی ',
-    'قیمت ',
+    'دسته بندی',
+    'قیمت',
     'برند',
 ]
 const items = ref(null)
@@ -21,7 +22,7 @@ function handleActive(index , item) {
     item.classList.remove('active')
   })
   items.value[index].classList.add('active')
-  emit('openList' , item)
+  emit('openList' ,item)
 }
 </script>
 

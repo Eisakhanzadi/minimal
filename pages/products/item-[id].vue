@@ -6,6 +6,14 @@ import sameThree from "public/image/offers/3.png";
 import sameFour from "public/image/offers/4.png";
 import sameFive from "public/image/offers/5.png";
 import sameSix from "public/image/offers/6.png";
+import imageEight from "public/image/offers/8.png";
+import imageSeven from "public/image/offers/7.png";
+import imageThree from "public/image/offers/3.png";
+import imageFour from "public/image/offers/4.png";
+import imageFive from "public/image/offers/5.png";
+import imageSix from "public/image/offers/6.png";
+import imageOne from "public/image/offers/9.png";
+import imageTwo from "public/image/offers/10.png";
 const introductionContent = ref(null)
 const infoContent = ref(null)
 const commentsContent = ref(null)
@@ -210,31 +218,56 @@ const commentsScore = [
 // });
 // var scrollDiv = document.getElementById("myDiv").offsetTop;
 // window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
-const sameContent = [
-  {
-    title: "چگونه مبل خود را بشوریم ؟",
-    img: sameOne
-  },
-  {
-    title: "چگونه مبل خود را بشوریم ؟",
-    img: sameTwo
-  },
-  {
-    title: "چگونه مبل خود را بشوریم ؟",
-    img: sameThree
-  },
-  {
-    title: "چگونه مبل خود را بشوریم ؟",
-    img: sameFour
-  },
-  {
-    title: "چگونه مبل خود را بشوریم ؟",
-    img: sameFive
-  },
-  {
-    title: "چگونه مبل خود را بشوریم ؟",
-    img: sameSix
-  },
+const sameContent =
+  [
+    {
+      name: "مبل راحتی تک نقره",
+      info: 1500000,
+      img: imageEight,
+      url: "/products/item-1"
+    },
+    {
+      name: "مبل راحتی تک نقره",
+      info: 2000000,
+      img: imageSeven,
+      url: "/products/item-2"
+    },
+    {
+      name: "مبل راحتی تک نقره ",
+      info: 5000000,
+      img: imageThree,
+      url: "/products/item-3"
+    },
+    {
+      name: "مبل راحتی تک نقره ",
+      info: 3300000,
+      img: imageFour,
+      url: "/products/item-4"
+    },
+    {
+      name: "مبل راحتی تک نقره",
+      info: 5600000,
+      img: imageFive,
+      url: "/products/item-5"
+    },
+    {
+      name: " مبل راحتی تک نقره",
+      info: 2500000,
+      img: imageSix,
+      url: "/products/item-6"
+    },
+    {
+      name: "مبل راحتی تک نقره",
+      info: 5600000,
+      img: imageOne,
+      url: "/products/item-7"
+    },
+    {
+      name: " مبل راحتی تک نقره",
+      info: 2500000,
+      img: imageTwo,
+      url: "/products/item-8"
+    },
 ]
 function toContent(item){
   item.scrollIntoView({ behavior:"smooth" })
@@ -362,15 +395,10 @@ function toContent(item){
       </div>
       <div class="same-content container mx-auto mt-10">
         <div class="same-content-title"><h4>مظالب مشابه</h4></div>
-        <div class="same-content-body">
+        <div class="same-content-body mt-5">
           <swiper-basic class="">
             <swiperSlide v-for="(item , index) in sameContent" :key="index">
-              <div class="card  flex flex-col items-center justify-center  hover:cursor-pointer">
-                <img :src="item.img" :alt="item.title">
-                <div class="card-body mt-3 ">
-                  <h3>{{ item.title }}</h3>
-                </div>
-              </div>
+              <card-product :data="item" :price="true" />
             </swiperSlide>
           </swiper-basic>
         </div>

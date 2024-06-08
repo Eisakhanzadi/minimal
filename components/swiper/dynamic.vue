@@ -1,24 +1,30 @@
 <template>
-  <div class="container overflow-hidden">
+  <div class=" overflow-hidden">
     <swiper
-        :spaceBetween="10"
+        :direction="direction"
+        :slidesPerView="direction==='vertical'?1:1"
         :loop="true"
+        :spaceBetween="20"
+        :grid="{
+        // rows:2 ,
+      }"
         @slideChange="onSlideChange"
+        :mousewheel="true"
         :navigation=" {
-        nextEl:'.button-next',
-        prevEl: '.button-prev'
-    }"
+      nextEl:'.button-next',
+      prevEl: '.button-prev'
+       }"
         :autoplay="{
-          delay:5000,
-                disableOnInteraction: false,
-        }"
-        :modules="[Autoplay, Navigation]"
+        delay:5000,
+        disableOnInteraction: false,
+      }"
+        :modules="[Autoplay, Navigation ,Grid , Pagination]"
         :pagination="{
-      clickable: true,
-    }
+       clickable: true,
+       }
 "
 
-        class="mySwiper1"
+        :class="`mySwiper1 w-full ${direction ? 'h-[400px] md:h-[400px]' : ''}`"
     >
       <slot/>
 
@@ -41,9 +47,11 @@
 </template>
 <script setup lang="ts">
 import {Swiper, SwiperSlide} from 'swiper/vue';
-import {Autoplay, Navigation} from 'swiper/modules';
-import 'swiper/css';
+import {Autoplay, Navigation, Mousewheel, Grid , Pagination} from 'swiper/modules';
+import 'swiper/css/grid';
+import 'swiper/css'
 import 'swiper/css/pagination';
+
 const props = defineProps({
   direction: {
     type: String,
@@ -51,15 +59,19 @@ const props = defineProps({
   },
   breakpoint: Object,
   data: Object,
+  grid: {
+    type: Number,
+    default: 1
+  }
 })
 
 function onSlideChange() {
-  console.log('slide change');
+  // console.log('slide change');
 }
 </script>
 <style scoped lang="scss">
 .swiper {
-  padding: 20px 0 20px;
+  padding: 20px 50px;
 
 }
 

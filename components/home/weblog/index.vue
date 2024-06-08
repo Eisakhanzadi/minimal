@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import { SwiperSlide } from 'swiper/vue';
 const props = defineProps(['data'])
 const {data} = props
 </script>
 
 <template>
-  <div class="backdrop-weblog py-10">
-    <div class="py-10">
+  <div class="backdrop-weblog pt-10 pb-14">
+    <div class="pt-5  lg:pt-10">
       <div class="text-center title"><h2>{{ data.title }}</h2></div>
       <div class="text-center sub-title"><p>{{ data.subTitle }}</p></div>
     </div>
-    <div class="container px-5 flex flex-col gap-10 mt-10 mx-auto">
-      <swiper-dynamic direction='vertical'>
-          <swiper-slide v-for="(item,index) in data.content" :key="index">
-          <home-weblog-card  :data="item"/>
-<!--          <home-weblog-card v-for="(item,index) in data.content" :key="index" :data="item"/>-->
-          </swiper-slide>
+    <div class="container px-5 flex flex-col gap-10 mt-8 mx-auto">
+      <swiper-dynamic direction='vertical' :grid="2" >
+        <swiper-slide v-for="(item,index) in data.content" :key="index" class="h-fit my-auto">
+          <home-weblog-card :data="item"/>
+        </swiper-slide>
       </swiper-dynamic>
     </div>
   </div>

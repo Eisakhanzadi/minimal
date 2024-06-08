@@ -10,19 +10,17 @@ import imageTwo from "public/image/offers/10.png";
 import "../../node_modules/multi-range-slider-vue/MultiRangeSliderBlack.css";
 import "../../node_modules/multi-range-slider-vue/MultiRangeSliderBarOnly.css";
 
-const filtersMobile = reactive({
-  brands: false,
-  prices: false,
-  categories: false,
-  filters: false
-})
+ const brands=ref(false)
+ const prices=ref(false)
+ const cat=ref(false)
+ const filters=ref( false)
 
 const breadcrumb = [
   {
     name: "محصولات"
   }
 ]
-const filter = [
+const sort = [
   {
     name: "پربازدید ترین",
     url: ""
@@ -43,6 +41,52 @@ const filter = [
     name: "تخفیف دار",
     url: ""
   },
+]
+const filter = [
+  {
+    name: "برند",
+    url: "",
+    sub: []
+  },
+  {
+    name: "رنگ",
+    url: "",
+    sub: []
+  },
+  {
+    name: "مدل",
+    url: "",
+    sub: []
+  },
+  {
+    name: "فروشنده",
+    url: "",
+    sub: []
+  },
+
+]
+const brandItems = [
+  {
+    name: "اپل",
+    url: "",
+    sub: []
+  },
+  {
+    name: "سامسونگ",
+    url: "",
+    sub: []
+  },
+  {
+    name: "شیائمی",
+    url: "",
+    sub: []
+  },
+  {
+    name: "سونی",
+    url: "",
+    sub: []
+  },
+
 ]
 const data = [
   {
@@ -224,36 +268,59 @@ const category = [
 ]
 const currentPage = ref(1)
 
-function handleFiltersMobile(item){
+function handleFiltersMobile(item) {
+   /* get title emit */
   if (item === 'دسته بندی') {
-    filtersMobile.categories = true
-  } else if (item === 'قیمت') {
-    filtersMobile.prices = true
-  } else if (item === 'برند') {
-    filtersMobile.brands = true
+    cat.value = true
+  }
+  else{
+    cat.value = false
+  }
+  if (item === 'قیمت') {
+    prices.value = true
   } else {
-    filtersMobile.filters = true
+    prices.value = false
+
+  }
+  if (item === 'برند') {
+    brands.value = true
+h
+  } else {
+    brands.value = false
+
+  }
+  if (item === 'فیلتر') {
+    filters.value = true
+  } else {
+    filters.value = false
   }
 }
+watch(()=>useRoute().fullPath , ()=>{
+  filters.value = false
+  cat.value = false
+  brands.value = false
+  prices.value = false
+})
+
 </script>
 
 <template>
   <div class="products">
     <section>
-      <div class="container mx-auto">
+      <div class="container px-5 mx-auto" data-aos="fade-up">
         <bread-crumb :data="breadcrumb"/>
       </div>
     </section>
-    <main class="grid grid-cols-12 gap-3 items-start container mx-auto pt-10">
-      <aside class="col-span-3 hidden md:flex flex-col gap-5">
-        <div class="search aside-item p-0">
+    <main class="grid grid-cols-12 gap-3 items-start container mx-auto md:pt-10">
+      <aside class="col-span-4 lg:col-span-3 hidden md:flex flex-col gap-5">
+        <div class="search aside-item p-0" data-aos="fade-up">
           <form>
             <input type="text"
                    class="bg-transparent caret-[#AE7BB6] py-3 w-full outline-0 px-4 placeholder:text-[#AE7BB6] "
                    placeholder="جستوجو">
           </form>
         </div>
-        <div class="category aside-item">
+        <div class="category aside-item" data-aos="fade-up">
           <div class="aside-title text-center">
             <h4 class="title">دسته بندی</h4>
           </div>
@@ -263,31 +330,31 @@ function handleFiltersMobile(item){
             </ul>
           </div>
         </div>
-        <div class="price aside-item">
+        <div class="price aside-item" data-aos="fade-up">
           <div class="aside-title text-center">
             <h4 class="title">محدوده قیمت</h4>
           </div>
-          <div>
-
-          </div>
-          <div class="filter aside-item">
-            <div class="aside-title text-center">
-              <h4 class="title">فیلتر</h4>
-            </div>
-            <div>
-              <ul class="">
-                <categories :data="item" v-for="(item , index) in category" :key="index"/>
-              </ul>
-            </div>
+          <div class="mt-5">
+            <renge-slider/>
           </div>
         </div>
+<!--          <div class="filter aside-item" data-aos="fade-up">-->
+<!--            <div class="aside-title text-center">-->
+<!--              <h4 class="title">فیلتر</h4>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--              <ul class="">-->
+<!--                <categories :data="item" v-for="(item , index) in filter" :key="index"/>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
       </aside>
-      <article class=" col-span-12 md:col-span-9 grid grid-cols-12 gap-x-5 gap-y-5">
+      <article class=" col-span-12 md:col-span-8 lg:col-span-9 grid grid-cols-12 gap-x-5 gap-y-5 md:px-2 lg:px-0">
         <section class="col-span-12 grid w-full">
-          <div class="border-b-2 border-[#F6ECF8] py-3">
-            <div class="  w-full  ">
+          <div class="border-b-2 border-[#F6ECF8] pb-4 pt-2 lg:py-3">
+            <div class="  w-full  " data-aos="fade-up">
               <div class=" hidden md:block">
-                <navbar-filters :data="filter" theme="0" filter="product"/>
+                <navbar-filters :data="sort" theme="0" filter="product"/>
               </div>
               <div class="md:hidden px-5">
                 <navbar-filters-mobile @open-list="handleFiltersMobile" theme="0" filter="product"/>
@@ -296,9 +363,10 @@ function handleFiltersMobile(item){
           </div>
         </section>
         <section class="col-span-12 grid grid-cols-12 px-5 md:px-0  gap-5">
-          <home-product-card v-for="(item , index) in data" :key="index" class="col-span-6 md:col-span-4 " :data="item"/>
+          <card-product v-for="(item , index) in data" :price="true" :key="index" class="col-span-6 md:col-span-6 lg:col-span-4 "
+                             :data="item" data-aos="fade-up"/>
         </section>
-        <section class="pagination col-span-12 flex justify-center px-5 my-16 md:px-0">
+        <section class="pagination col-span-12 flex justify-center px-5 my-16 md:px-0" data-aos="fade-up">
           <vue-awesome-paginate
               dir="rtl"
               :total-items="50"
@@ -308,6 +376,39 @@ function handleFiltersMobile(item){
               :hide-prev-next="true"
               :on-click="onClickHandler"
           />
+        </section>
+        <section>
+          <transition-group name="transition">
+            <div class="nav fixed z-20 backdrop-filter backdrop-blur-sm inset-0" @click.self="handleFiltersMobile"
+                 v-if="filters">
+              <ul class="w-2/3 px-3 sm:w-1/2 bg-[#F6ECF8] h-full overflow-y-auto ">
+                <li class="filter-product-title text-center mt-5 mb-5"><h5>فیلترها :</h5></li>
+                <categories :data="item" v-for="(item , index) in filter" :key="index"/>
+              </ul>
+            </div>
+          </transition-group>
+        </section>
+        <section>
+          <transition-group name="transition">
+            <div class="nav fixed z-20 backdrop-filter backdrop-blur-sm inset-0" @click.self="handleFiltersMobile"
+                 v-if="cat">
+              <ul class="w-2/3 px-3 sm:w-1/2 bg-[#F6ECF8] h-full overflow-y-auto ">
+                <li class="filter-product-title  mt-5 mb-5"><h5>دسته بندی ها :</h5></li>
+                <categories :data="item" v-for="(item , index) in category" :key="index"/>
+              </ul>
+            </div>
+          </transition-group>
+        </section>
+        <section>
+          <transition-group name="transition">
+            <div class="nav fixed z-20 backdrop-filter backdrop-blur-sm inset-0" @click.self="handleFiltersMobile"
+                 v-if="brands">
+              <ul class="w-2/3 px-3 sm:w-1/2 bg-[#F6ECF8] h-full overflow-y-auto ">
+                <li class="filter-product-title  mt-5 mb-5"><h5>برند ها :</h5></li>
+                <categories :data="item" v-for="(item , index) in brandItems" :key="index"/>
+              </ul>
+            </div>
+          </transition-group>
         </section>
       </article>
     </main>
@@ -334,5 +435,22 @@ function handleFiltersMobile(item){
   .card:hover > :not(:hover) {
     opacity: 0.5 !important;
   }
+}
+.filter-product-title{
+  color: #AE7BB6;
+  font-size: 20px;
+  font-weight: bold;
+}
+.transition-enter-active {
+  transition: 0.5s ease;
+}
+
+.transition-leave-active {
+  transition: 0.8s ease;
+}
+
+.transition-enter-from, .transition-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
 }
 </style>
