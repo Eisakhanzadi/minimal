@@ -4,23 +4,22 @@
         :slidesPerView="1"
         :spaceBetween="10"
         :loop="true"
+        :mousewheel="true"
         :navigation=" {
         nextEl:'.button-next',
-    prevEl: '.button-prev'
+         prevEl: '.button-prev'
     }"
         :autoplay="{
           delay:5000,
-                disableOnInteraction: false,
-
+          disableOnInteraction: false,
         }"
         :modules="[Autoplay, Navigation]"
-
         :pagination="{
-      clickable: true,
+      clickable: true
     }"
         :breakpoints="{
-      '640': {
-        slidesPerView: 3,
+      '400': {
+        slidesPerView: 2,
         spaceBetween: 20,
       },
       '768': {
@@ -74,13 +73,15 @@ import 'swiper/css/pagination';
       width: 18px;
       height: 18px;
     }
+
     &.angel-right {
-      transform: rotate(45deg)translate(-50%,-50%);
+      transform: rotate(45deg) translate(-50%, -50%);
       border-bottom: 0;
       border-left: 0;
     }
+
     &.angel-left {
-      transform: rotate(45deg)translate(-50% , -50%);
+      transform: rotate(45deg) translate(-50%, -50%);
       border-top: 0;
       border-right: 0;
     }
