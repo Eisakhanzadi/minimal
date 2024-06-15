@@ -25,6 +25,7 @@
 <!--  </Swiper>-->
   <swiper
       :direction="'vertical'"
+      :mousewheel="true"
       :pagination="{
       clickable: true,
     }"
