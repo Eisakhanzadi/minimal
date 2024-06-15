@@ -35,7 +35,6 @@
 #componentContainer > li > button.active-page {
   position: relative;
   background: #EAD1EE;
-  //border-bottom: #5E2E66 2.5px solid ;
   &:after {
     position: absolute;
     bottom: 0;
@@ -47,12 +46,14 @@
   }
 }
 
-/*change color style pagination */
-.feedback , .new-product , .last-weblog{
+/*change color & size style  pagination */
   .swiper-pagination-bullet-active{
     background: #AE7BB6 !important;
   }
   .swiper-pagination-bullet{
     background: #c5a7c9 !important;
+    padding:clamp(4px , 1vw ,6px);
   }
+.sticky .menu nav ul> li> a{
+  color: black !important;
 }
