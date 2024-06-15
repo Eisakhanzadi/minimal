@@ -4,11 +4,11 @@ const props = defineProps(['data' , 'count'])
 
 <template>
 <div class="card grid grid-cols-12 gap-5 ">
-  <div class="card-header col-span-4 flex items-center relative">
-    <span class="w-10 h-10 flex items-center justify-center absolute right-5 top-1/2 transform translate-y-[-50%] rounded">{{count+1}}</span>
+  <div class="card-header col-span-3 lg:col-span-4 flex items-center relative">
+    <span class="w-10 h-10 flex items-center justify-center absolute right-[30%] lg:right-[5%] xl:right-[20%] top-[50%] transform translate-y-[-50%] translate-x-[50%]  rounded">{{count+1}}</span>
     <img src="/public/image/offers/5.png"  alt="" class=" ms-auto w-[110px] h-[110px]">
   </div>
-  <div class="body col-span-8">
+  <div class="body col-span-9 lg:col-span-8">
     <div class="category flex items-center gap-1.5"><h5>{{data.category}}</h5></div>
     <nuxt-link :to="data.url" class="title"><h4>{{data.title}}</h4></nuxt-link>
   </div>

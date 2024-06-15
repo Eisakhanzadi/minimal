@@ -36,7 +36,7 @@ function show() {
 
 <style scoped lang="scss">
 .theme {
-  padding: 16px 20px;
+  padding: 5px 10px;
   margin-top: 10px;
 }
 

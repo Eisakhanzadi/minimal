@@ -72,7 +72,7 @@ const weblog = {
     </div>
     <div class="weblog-title mb-3 lg:mb-7 px-5 container mx-auto "><h1>محبوب ترین بلاگ ها</h1></div>
     <div class="swiper-container my-5 lg:my-10">
-      <swiper-dynamic class="container  mx-auto ">
+      <swiper-dynamic class="container  mx-auto " :weblog="true">
         <swiper-slide v-for="(item , index) in weblog.content.length " class="px-5 py-10 md:px-0" :key="index">
           <card-swiper :data="weblog.content[index]"/>
         </swiper-slide>
@@ -95,16 +95,16 @@ const weblog = {
         </div>
       </div>
       <div class="grid gap-5">
-        <article class="grid grid-cols-12 gap-5 lg:gap-10 ">
+        <article class="grid grid-cols-12 gap-5 px-5 sm:px-0 lg:gap-10 ">
           <card-wash class="col-span-6 md:col-span-4 xl:col-span-3" v-for="(item , index) in 10"
                      :key="index"></card-wash>
         </article>
-        <div class="pagination flex justify-center mb-5 mt-10">
+        <div class="pagination flex justify-center mb-5 mt-10 ">
           <vue-awesome-paginate
               dir="rtl"
               :total-items="50"
               :items-per-page="5"
-              :max-pages-shown="5"
+              :max-pages-shown="3"
               v-model="currentPage"
               :hide-prev-next="true"
               :on-click="onClickHandler"
