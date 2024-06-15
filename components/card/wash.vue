@@ -13,25 +13,10 @@
         <nuxt-link to="/weblog/item-5" class="card-title  ">
           <h3>چگونه مبل خود را بشوییم ؟</h3>
         </nuxt-link>
-        <div class="category md:hidden  ">
-          <h5>دسته بندی نظافت</h5>
-        </div>
-      </div>
-      <div class="info flex me-auto lg:ms-auto col-span-12">
-        <span class="author me-2">عیسی خانزادی</span>
-        <span class="time">1402/0.5/06</span>
       </div>
     </div>
     <div class="card-text">
       <p>با استفاده از بهترین متریال مصرفی توجه توجه پارچه مبل مستحکم</p>
-    </div>
-  </div>
-  <div class="card-footer pb-3  px-3 flex items-center justify-between">
-    <nuxt-link class="category hidden md:block">
-      <h5>دسته بندی نظافت</h5>
-    </nuxt-link>
-    <div class="more hidden md:block">
-      <nuxt-link class="" to=""></nuxt-link>
     </div>
   </div>
 </div>
