@@ -4,6 +4,7 @@ import brand from '@/public/svg/navbar-brand.svg';
 import HoverMenu from "~/components/header/hover-menu.vue";
 import NavbarMobile from "~/components/header/navbar-mobile.vue";
 const showSearch = ref(false)
+const navbar = ref(null)
 const data = {
   brand:brand,
   bookmark:heart,
@@ -30,83 +31,107 @@ const data = {
     },
   ]
 }
-const  menu = [
+const  menu =  [
+  {
+    name: "خانه",
+    link: "/",
+  },
+  {
+    name: "محصولات",
+    link: "/products",
+    sub: [
       {
-        name: "خانه",
-        link: "/",
+        name: "مبلامان",
+        link: ""
       },
       {
-        name: "محصولات",
-        link: "/products",
+        name: "سرویس خوای",
+        link: ""
+      },
+      {
+        name: "صندلی",
+        link: ""
+      },
+      {
+        name: "آینه",
+        link: ""
+      },
+      {
+        name: "کنسول",
+        link: ""
+      },
+      {
+        name: "اکسسوری",
+        link: "",
         sub: [
           {
-            name: "محصولات",
+            name: "مجسمه ",
             link: ""
           },
           {
-            name: "محصولات",
+            name: "آباژور ",
             link: ""
           },
           {
-            name: "محصولات",
+            name: "لوستر ",
             link: ""
           },
           {
-            name: "محصولات",
+            name: "ساعت ",
+            link: ""
+          },
+          {
+            name: "کوسن و شال مبل ",
+            link: ""
+          },
+          {
+            name: "گلدان ",
             link: ""
           },
         ]
+      },
+      {
+        name: "میز ناهارخوری",
+        link: ""
+      },
+      {
+        name: "میز",
+        link: ""
+      },
+    ]
+  },
+  {
+    name: "وبلاگ",
+    link: "/weblog",
+    sub: [
+      {
+        name: "وبلاگ",
+        link: " "
       },
       {
         name: "وبلاگ",
-        link: "/weblog",
-        sub: [
-          {
-            name: "وبلاگ",
-            link: " "
-          },
-          {
-            name: "وبلاگ",
-            link: ""
-          },
-          {
-            name: "وبلاگ ",
-            link: "",
-            sub: [
-              {
-                name: "وبلاگ",
-                link: " "
-              },
-              {
-                name: "وبلاگ",
-                link: ""
-              },
-              {
-                name: "وبلاگ ",
-                link: ""
-              },
-              {
-                name: " وبلاگ",
-                link: ""
-              },
-            ]
-          },
-          {
-            name: " وبلاگ",
-            link: ""
-          },
-        ]
+        link: ""
       },
       {
-        name: "تماس با ما",
-        link: "/contact-us",
+        name: "وبلاگ ",
+        link: ""
       },
       {
-        name: "درباره ما",
-        link: "/about-us",
+        name: " وبلاگ",
+        link: ""
       },
-
     ]
+  },
+  {
+    name: "تماس با ما",
+    link: "/contact-us",
+  },
+  {
+    name: "درباره ما",
+    link: "/about-us",
+  },
+
+]
 const showMenu = ref(false)
 const route = useRoute()
 watch(()=>route.name , ()=>{
@@ -121,10 +146,23 @@ function showNavbarMobile(){
   }
   showMenu.value = !showMenu.value
 }
+if (process.client){
+  window.addEventListener('scroll' , ()=>{
+    if (scrollNumber.value>50){
+      navbar.value.classList.add('sticky')
+      navbar.value.classList.add('bg-white')
+    }
+    if (scrollNumber.value >  window.scrollY){
+      navbar.value.classList.remove('sticky')
+      navbar.value.classList.remove('bg-white')
+    }
+    scrollNumber.value = window.scrollY
+  })
+}
 </script>
 
 <template>
-<div class="navbar shadow">
+<div class="navbar shadow top-0 z-10"  ref="navbar">
   <div class="container px-3 md:px-0 py-5 mx-auto flex  items-center justify-between">
     <div class="hamburger-menu flex flex-col gap-2 relative lg:hidden cursor-pointer " @click="showNavbarMobile">
       <div class="hamburger-item "></div>
