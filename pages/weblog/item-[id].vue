@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Server from "~/.output/server/chunks/build/server.mjs";
-
 const search = ref()
 import sameOne from 'public/image/offers/1.png'
 import sameTwo from 'public/image/offers/2.png'

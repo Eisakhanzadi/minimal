@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {black} from "ansi-colors";
-
 const data = ref({
   menu: [
     {

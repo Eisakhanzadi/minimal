@@ -68,7 +68,7 @@ function handleActive(index , item) {
     }
     &.nav-list:after{
       content: "";
-      width: 0%;
+      width: 0;
       height: 3px;
       background: #AE7BB6;
       position: absolute;

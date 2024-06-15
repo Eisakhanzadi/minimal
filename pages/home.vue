@@ -29,7 +29,6 @@ import brandOne from '@/public/image/brands/1.png'
 import brandTwo from '@/public/image/brands/2.png'
 import brandThree from '@/public/image/brands/3.png'
 import brandFour from '@/public/image/brands/4.png'
-import {filters} from "css-select";
 const category = ref(null)
 const offers = [
   {
