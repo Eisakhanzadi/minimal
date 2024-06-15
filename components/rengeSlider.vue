@@ -20,9 +20,6 @@ const range = reactive({
     </div>
   </div>
 </template>
-
-
-
 <style lang="scss" scoped>
 div{
   font-size: 16px ;
