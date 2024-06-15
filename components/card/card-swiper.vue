@@ -6,8 +6,8 @@ const {data} = props
 <template>
   <div class="card grid grid-cols-12 mx-auto gap-5">
     <div class="card-header col-span-6">
-      <figure>
-        <img :src="data.image" class="w-full " :alt="data.title">
+      <figure class="h-full w-full">
+        <img :src="data.image" class="w-full h-full" :alt="data.title">
       </figure>
     </div>
     <div class="card-body col-span-6 flex flex-col gap-1 md:gap-2.5">

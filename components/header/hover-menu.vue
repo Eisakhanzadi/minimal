@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {black} from "ansi-colors";
+
 const data = ref({
   menu: [
     {
@@ -102,10 +104,12 @@ const data = ref({
 
   ],
 })
+const props = defineProps(['color'])
+const text = props.color ? `${props.color}`:''
 </script>
 
 <template>
-  <nav class="flex justify-end xl:justify-between ms-auto lg:w-full items-center ">
+  <nav class="flex justify-end xl:justify-between ms-auto lg:w-full items-center " :class="`${color ? `text-[${color}]` :'' }`">
     <ul class="nav menu hidden justify-between gap-5 lg:gap-5 xl:gap-3 2xl:gap-7 xl:flex">
       <li class="nav-item relative " v-for="(item , index) in data.menu" :key="index">
         <nuxt-link class="nav-link flex items-center gap-2 hover:cursor-pointer " :to="item.link">
@@ -138,7 +142,9 @@ nav {
   .menu {
     position: relative;
     z-index: 2;
-
+    & >li {
+      color: v-bind(text) !important;
+    }
     a {
       cursor: pointer;
     }
@@ -156,7 +162,6 @@ nav {
       transform: translateY(-20%);
       visibility: hidden;
       z-index: -1;
-
       & .sub-menu {
         position: absolute;
         right: 101%;

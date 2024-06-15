@@ -112,7 +112,7 @@ function scroll(){
           </p>
         </div>
       </div>
-      <div class="footer-body px-10 pb-3 pt-5 md:pt-10 ">
+      <div class="footer-body px-5 lg:px-10 pb-3 pt-5 md:pt-10 ">
         <div class="nav relative grid grid-cols-12 gap-y-7 md:gap-0 items-center  ">
           <div class="popular-product col-span-6 md:col-span-2  flex flex-col gap-2 md:gap-5">
             <div class="popular-title">
@@ -140,10 +140,10 @@ function scroll(){
             <div class="contact-us-title ">
               <h4 class="flex bg-white ">ارتباط با ما </h4>
             </div>
-            <ul class="nav flex md:flex-col gap-2 ">
+            <ul class="nav flex flex-col sm:flex-row md:flex-col gap-2 ">
               <li class="nav-item ">
-                <nuxt-link :to="`tel:${footer.contactUs[0].info}`" class="nav-link flex gap-1">
-                  <div class="flex gap-1.5">
+                <nuxt-link :to="`tel:${footer.contactUs[0].info}`" class="nav-link flex items-center gap-1">
+                  <div class="flex gap-1.5 items-center">
                     <span class="icon"> <lazy-icons-phone/></span>
                     <span class="name">{{ footer.contactUs[0].name }}</span>
                   </div>
@@ -151,7 +151,7 @@ function scroll(){
                 </nuxt-link>
               </li>
               <li class="nav-item hidden md:block ">
-                <nuxt-link :to="`mailto:${footer.contactUs[1].info}`" class="nav-link flex gap-1">
+                <nuxt-link :to="`mailto:${footer.contactUs[1].info}`" class="nav-link flex items-center gap-1">
                   <div class="flex gap-1.5 items-center">
                     <span class="icon"> <lazy-icons-message/> </span>
                     <span class="name">{{ footer.contactUs[1].info }}</span>

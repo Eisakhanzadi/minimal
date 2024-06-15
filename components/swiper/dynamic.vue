@@ -4,7 +4,14 @@
         :direction="direction"
         :slidesPerView="direction==='vertical'?1:1"
         :loop="true"
-        :spaceBetween="20"
+        :spaceBetween="50"
+        :breakpoints="{
+      '1024': {
+        slidesPerView: `${direction === 'vertical' ? 2 : 1}`,
+        spaceBetween: 60,
+      },
+
+    }"
         :grid="{
         // rows:2 ,
       }"
@@ -24,7 +31,7 @@
        }
 "
 
-        :class="`mySwiper1 w-full ${direction ? 'h-[400px] md:h-[400px]' : ''}`"
+        class="mySwiper1 w-full " :class="{weblog:weblog===true , vertical:direction}"
     >
       <slot/>
 
@@ -51,12 +58,14 @@ import {Autoplay, Navigation, Mousewheel, Grid , Pagination} from 'swiper/module
 import 'swiper/css/grid';
 import 'swiper/css'
 import 'swiper/css/pagination';
+import vertical from "~/components/swiper/vertical.vue";
 
 const props = defineProps({
   direction: {
     type: String,
     default: "horizontal"
   },
+  weblog:Boolean,
   breakpoint: Object,
   data: Object,
   grid: {
@@ -71,7 +80,7 @@ function onSlideChange() {
 </script>
 <style scoped lang="scss">
 .swiper {
-  padding: 20px 50px;
+  padding: 20px 50px 20px 20px;
 
 }
 
@@ -101,5 +110,29 @@ function onSlideChange() {
       border-right: 0;
     }
   }
+}
+.vertical{
+  height: 685px;
+  @media screen and (max-width: 1024px)  {
+    height: 280px;
+  }
+  @media screen and (max-width: 768px)  {
+    height: 500px;
+  }
+  @media screen and (max-width: 600px)  {
+    height: 480px;
+  }
+  @media screen and (max-width: 558px)  {
+    height: 460px;
+  }
+  @media screen and (max-width: 510px)  {
+    height: 430px;
+  }
+  @media screen and (max-width: 460px)  {
+    height: 400px;
+  }
+}
+.weblog{
+  height: auto !important;
 }
 </style>

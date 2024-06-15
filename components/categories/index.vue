@@ -3,10 +3,16 @@ const props = defineProps(["data", "theme"])
 const parent = ref(null)
 const child = ref(null)
 const showList = ref(false)
-
+const route = useRoute()
+const router = useRouter()
 function show() {
   parent.value.classList.toggle('show')
   showList.value = !showList.value
+}
+function add(c){
+  const query = {...route.query ,category:c}
+  router.push({path:route.path,query:query})
+  console.log(query)
 }
 </script>
 
@@ -15,14 +21,14 @@ function show() {
       :class="{ border : props.theme === 'parent' , theme:props.theme===true , borderNone:!props.data.sub}"
       ref="parent">
     <div class="flex  justify-between w-full">
-      <nuxtLink :to="props.data.link">
+      <nuxtLink :to="props.data.link" @click="add(props.data.name)">
         <span>{{ props.data.name }}</span>
       </nuxtLink>
       <div class="navbar-mobile-icon">
-        <span v-if="props.data.sub" class="icon" @click="show"></span>
+        <span v-if="props.data.sub && props.data.sub.length" class="icon" @click="show"></span>
       </div>
     </div>
-    <div class="sub-menu overflow-hidden" v-if="props.data.sub " ref="child">
+    <div class="sub-menu overflow-hidden" v-if="props.data.sub && props.data.sub.length " ref="child">
       <ul class="nav w-full overflow-hidden">
         <transition-group name="transition">
           <categories v-if="props.data.sub && showList" v-for="(item , index) in props.data.sub" :key="index" :data="item"

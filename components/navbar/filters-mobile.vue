@@ -60,7 +60,7 @@ function handleActive(index , item) {
         font-size: 10px;
         line-height: 10px;
       }
-      font-size: var(--products-filter--font-size-item-responsive);
+      font-size: var(--products-filter-font-size-item-responsive);
       font-family: var(--products-filter-font-family-item-responsive);
     }
     &.nav-list{
