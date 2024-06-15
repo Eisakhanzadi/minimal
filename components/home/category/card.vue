@@ -7,8 +7,8 @@ const {data, theme} = props
   <div class="card flex flex-col items-center justify-center gap-2 hover:cursor-pointer">
     <div class="card-header">
       <div class="image">
-        <figure>
-          <img :src="data.img" :alt="data.name">
+        <figure class=" md:w-full md:h-full " :class="`${theme==='category' ? 'w-16 h-16' : ''}`" >
+          <img :src="data.img" :alt="data.name" class="w-full h-full object-cover+">
         </figure>
       </div>
     </div>
@@ -27,26 +27,7 @@ const {data, theme} = props
 </template>
 
 <style scoped lang="scss">
-/*.card{
-  overflow: hidden;
-  width: fit-content;
-  &:hover {
-    &:after {
-      transform:rotate(-45deg) translateY(-250px);
-    }
-  }
-  &:after {
-    content: "";
-    width: 200%;
-    height: 10px;
-    background: crimson;
-    transform: translateY(50px)rotate(-45deg);
-    background: linear-gradient( 180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3), rgba(190, 40, 240, 0.3));
-    transition: 0.5s;
-    transform-origin: center;
-  }
-}
-*/
+
 h2 {
   font-size: var(--home-swiper-category-font-size-title);
   font-weight: var(--home-swiper-category-font-weight-title);
