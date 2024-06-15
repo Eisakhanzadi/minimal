@@ -9,7 +9,8 @@ import imageOne from "public/image/offers/9.png";
 import imageTwo from "public/image/offers/10.png";
 import "../../node_modules/multi-range-slider-vue/MultiRangeSliderBlack.css";
 import "../../node_modules/multi-range-slider-vue/MultiRangeSliderBarOnly.css";
-
+const route = useRoute()
+const router = useRouter()
  const brands=ref(false)
  const prices=ref(false)
  const cat=ref(false)
@@ -301,7 +302,11 @@ watch(()=>useRoute().fullPath , ()=>{
   brands.value = false
   prices.value = false
 })
-
+function setQuery(name){
+  const query = {...route.query ,sort:name}
+  router.push({path:route.path,query:query})
+  console.log(query)
+}
 </script>
 
 <template>
@@ -338,23 +343,13 @@ watch(()=>useRoute().fullPath , ()=>{
             <renge-slider/>
           </div>
         </div>
-<!--          <div class="filter aside-item" data-aos="fade-up">-->
-<!--            <div class="aside-title text-center">-->
-<!--              <h4 class="title">فیلتر</h4>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              <ul class="">-->
-<!--                <categories :data="item" v-for="(item , index) in filter" :key="index"/>-->
-<!--              </ul>-->
-<!--            </div>-->
-<!--          </div>-->
       </aside>
       <article class=" col-span-12 md:col-span-8 lg:col-span-9 grid grid-cols-12 gap-x-5 gap-y-5 md:px-2 lg:px-0">
         <section class="col-span-12 grid w-full">
-          <div class="border-b-2 border-[#F6ECF8] pb-4 pt-2 lg:py-3">
-            <div class="  w-full  " data-aos="fade-up">
+          <div class="border-b-2 border-[#F6ECF8] pb-4 pt-2 lg:py-3"  data-aos="fade-up">
+            <div class="  w-full  ">
               <div class=" hidden md:block">
-                <navbar-filters :data="sort" theme="0" filter="product"/>
+                <navbar-filters :data="sort" theme="0" filter="product" @set-query="setQuery"/>
               </div>
               <div class="md:hidden px-5">
                 <navbar-filters-mobile @open-list="handleFiltersMobile" theme="0" filter="product"/>
@@ -363,7 +358,7 @@ watch(()=>useRoute().fullPath , ()=>{
           </div>
         </section>
         <section class="col-span-12 grid grid-cols-12 px-5 md:px-0  gap-5">
-          <card-product v-for="(item , index) in data" :price="true" :key="index" class="col-span-6 md:col-span-6 lg:col-span-4 "
+          <card-product v-for="(item , index) in data" :price="true" :key="index" class="col-span-6 md:col-span-6 lg:col-span-4 xl:col-span-3"
                              :data="item" data-aos="fade-up"/>
         </section>
         <section class="pagination col-span-12 flex justify-center px-5 my-16 md:px-0" data-aos="fade-up">
@@ -374,7 +369,7 @@ watch(()=>useRoute().fullPath , ()=>{
               :max-pages-shown="5"
               v-model="currentPage"
               :hide-prev-next="true"
-              :on-click="onClickHandler"
+              @click="setQuery"
           />
         </section>
         <section>
