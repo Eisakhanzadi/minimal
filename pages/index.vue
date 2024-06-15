@@ -288,12 +288,10 @@ console.log(width.value)
 <template>
   <div>
     <section >
-      <HomeBanner/>
-<!--      <video ref="video" id="video" muted loop class="w-full h-[100vuh]" autoplay src="@/assets/HBxV1bYERoUAfPUEkrdbavc_Rebranding%20VideoClip%20-%20Final.mp4" playsinline  preload="auto" >-->
-<!--      </video>-->
+      <HomeBanner />
     </section>
     <section class="container mx-auto py-10" data-aos="fade-up">
-      <home-swiper :data="productSwiper"/>
+      <home-swiper :data="productSwiper" theme="category"/>
     </section>
     <section>
       <div class="container offers mx-auto my-3 md:my-10 overflow-hidden px-5 sm:px-10 md:px-2" data-aos="fade-up">
@@ -306,7 +304,7 @@ console.log(width.value)
         </div>
         <div class="body-offers grid grid-cols-12  gap-3 md:gap-10 overflow-hidden">
             <card-product v-for="(item , index) in offers" :key="index" :price="true"
-                          class="col-span-6 md:col-span-3 xl:col-span-3 w-full " :data="item" data-aos="fade-up"/>
+                          class="col-span-6 md:col-span-3 lg:col-span-3   w-full " :data="item" data-aos="fade-up"/>
         </div>
       </div>
     </section>
