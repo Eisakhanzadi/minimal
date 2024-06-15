@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Server from "~/.output/server/chunks/build/server.mjs";
+
 const search = ref()
 import sameOne from 'public/image/offers/1.png'
 import sameTwo from 'public/image/offers/2.png'
@@ -7,12 +9,13 @@ import sameFour from 'public/image/offers/4.png'
 import sameFive from 'public/image/offers/5.png'
 import sameSix from 'public/image/offers/6.png'
 import {SwiperSlide} from "swiper/vue";
+
 const breadcrumb = [
   {
-    name:'وبلاگ',
-    url:'/weblog'
-  },{
-  name:"چگ.نه مبل خود را بشوییم ؟"
+    name: 'وبلاگ',
+    url: '/weblog'
+  }, {
+    name: "چگ.نه مبل خود را بشوییم ؟"
   }
 ]
 const data = {
@@ -37,22 +40,22 @@ const data = {
     {
       category: "نظافت",
       title: "جنس کف مبلمان از چیست ؟",
-      url:'/weblog/item-21'
+      url: '/weblog/item-21'
     },
     {
       category: "سبک های مبل",
       title: "جنس کلاف مبلمان از چیست ؟",
-      url:'/weblog/item-22'
+      url: '/weblog/item-22'
     },
     {
       category: "طراحی مبل",
       title: "آماده سازی مبلمان چه مقدار زمان میبرد؟",
-      url:'/weblog/item-23'
+      url: '/weblog/item-23'
     },
     {
       category: "ایده",
       title: "آیا امکان تغییر رنگ میل وجود دارد؟",
-      url:'/weblog/item-24'
+      url: '/weblog/item-24'
     },
   ],
   time: '16 مهز 1403',
@@ -94,15 +97,15 @@ const data = {
 </script>
 
 <template>
-  <div class="grid gap-5">
-    <div class="breadcrumb container mx-auto">
+  <div class=" ">
+    <section class="breadcrumb px-5 container mx-auto">
       <lazy-bread-crumb :data="breadcrumb"/>
-    </div>
-    <div class="header">
+    </section>
+    <section class="header">
       <div class="subject-container pb-9 pt-5 md:py-10 px-5 ">
         <div class="subject  container mx-auto  grid grid-cols-12  gap-5 ">
-          <div class="subject-header col-span-12 md:ms-auto   md:col-span-5 order-1">
-            <img src="/public/image/id/1.png" class="w-full" alt="">
+          <div class="subject-header w-10/12 h-fit lg:w-auto col-span-12 md:ms-auto    md:col-span-5 order-1">
+            <img src="/public/image/id/1.png" class="w-full h-full" alt="">
           </div>
           <div class="subject-content col-span-12 md:col-span-7 flex flex-col justify-center md:mx-auto items-start">
             <div class="subject-category flex gap-2 my-2">
@@ -131,46 +134,47 @@ const data = {
           </div>
         </div>
       </div>
-    </div>
-    <div class="main container mx-auto grid grid-cols-12 gap-5 px-5">
-      <article class="col-span-12 md:col-span-8">
-        <div class="content text-justify"> <!-- v-html -->
-          <v-html-weblog/>
+    </section>
+    <section class="main container mx-auto lg:grid  grid-cols-3 gap-8 px-5 lg:px-5">
+      <article class=" lg:col-span-2 ">
+        <div class="content text-justify "> <!-- v-html -->
+                    <v-html-weblog class="w-[50%]"/>
         </div>
       </article>
-      <aside class="col-span-12 md:col-span-4 flex flex-col gap-5">
-        <div class="search hidden md:block">
+      <aside class="lg:col-span-1 flex flex-col gap-5">
+        <div class="search hidden lg:block">
           <div class="search-title py-2.5 mb-5"><h5 class="pe-2">جستوجو</h5></div>
           <div><input type="text" placeholder="جستوجو" class=" outline-0 py-2.5 px-4 w-full" v-model="search"></div>
         </div>
-        <div class="category hidden md:block ">
+        <div class="category hidden lg:block ">
           <div class="category-title py-2.5 mb-5 "><h5 class="pe-2">دسته بندی</h5></div>
           <div class="category-body">
-            <categories-item :items="data.categories"/>
+                        <categories-item :items="data.categories"/>
           </div>
         </div>
-        <div class="most-visited lg:sticky top-5">
-          <div class="most-visited-title py-2.5 mb-5 "><h5 class="pe-2">پربازدید ها</h5></div>
-          <div class="most-visited-body grid gap-y-3">
-            <card-most-visited v-for="(item , index) in data.mostVisited" :key="index" :data="item" :count="index"/>
-          </div>
-        </div>
+                <div class="most-visited lg:sticky top-5">
+                  <div class="most-visited-title py-2.5 mb-5 "><h5 class="pe-2">پربازدید ها</h5></div>
+                  <div class="most-visited-body grid gap-y-3">
+                    <card-most-visited v-for="(item , index) in data.mostVisited" :key="index" :data="item" :count="index"/>
+                  </div>
+                </div>
       </aside>
-    </div>
-    <div class="same-content container mx-auto mt-10">
-      <div class="same-content-title"><h4>مطالب مشابه</h4></div>
-      <div class="same-content-body mt-5">
-        <swiper-basic class="">
-          <swiperSlide v-for="(item , index) in data.sameContent" :key="index">
-            <card-product :data="item"/>
-          </swiperSlide>
-        </swiper-basic>
-      </div>
-    </div>
+    </section>
+        <div class="same-content container mx-auto mt-10 px-5 overflow-hidden">
+          <div class="same-content-title"><h4>مطالب مشابه</h4></div>
+          <div class="same-content-body  md:w-full mt-5">
+            <swiper-basic>
+              <swiperSlide v-for="(item , index) in data.sameContent" :key="index">
+                <card-product :data="item"/>
+              </swiperSlide>
+            </swiper-basic>
+          </div>
+        </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+//
 .search {
   .search-title {
     border-bottom: 2px solid #c7c7c7;
