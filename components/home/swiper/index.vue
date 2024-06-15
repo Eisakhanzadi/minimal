@@ -28,9 +28,9 @@
       class="mySwiper p-10 "
   >
     <swiper-slide v-for="(item , index) in data" :key="index" :class="`${theme==='brands'?'mx-auto':''}`">
-      <home-category-card :data="item" v-if="theme !== 'brands'"/>
+      <home-category-card :data="item" v-if="theme !== 'brands'" :theme="props.theme"/>
       <div v-else>
-        <figure class="overflow-hidden">
+        <figure class="overflow-hidden h-full w-full">
           <img :src="item.image" class="w-full h-full" :alt="index">
         </figure>
       </div>
