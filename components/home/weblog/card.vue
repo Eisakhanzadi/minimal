@@ -10,7 +10,7 @@ const {data} = props
         <img :src="data.image" class="w-full " :alt="data.title">
       </figure>
     </div>
-    <div class="card-body col-span-12 md:col-span-5 flex flex-col gap-5">
+    <div class="card-body col-span-12 md:col-span-5 flex flex-col gap-2 md:gap-5">
       <div class="title"><h2>{{ data.title }}</h2></div>
       <div class="info flex gap-5">
         <div class="author flex gap-2">
@@ -41,7 +41,10 @@ figure {
   &:after {
     content: "";
     position: absolute;
-    inset: 30px;
+    top: 5%;
+    right: 2%;
+    bottom: 5%;
+    left: 2%;
     background: rgba(255, 255, 255, 0.3);
   }
 
@@ -57,6 +60,11 @@ figure {
   font-size: var(--home-weblog-item-title-font-size);
   font-family: var(--home-weblog-item-title-font-family);
   font-weight: var(--home-weblog-item-title-font-weight);
+  @media screen and (max-width: 768px) {
+  font-size: var(--home-weblog-item-title-font-size-responsive);
+
+  }
+
 }
 .card-text {
   display: -webkit-box;
