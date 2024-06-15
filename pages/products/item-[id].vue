@@ -17,6 +17,8 @@ import imageTwo from "public/image/offers/10.png";
 const introductionContent = ref(null)
 const infoContent = ref(null)
 const commentsContent = ref(null)
+const messageCommentModal = ref(false)
+const buyAdvisor = ref(false)
 const breadCrumb = [
   {
     name: 'محصولات',
@@ -272,6 +274,12 @@ const sameContent =
 function toContent(item){
   item.scrollIntoView({ behavior:"smooth" })
 }
+function closeMessage(){
+  messageCommentModal.value = false
+}
+function closeBuyAdvisor(){
+  buyAdvisor.value = false
+}
 </script>
 
 <template>
@@ -318,17 +326,17 @@ function toContent(item){
               </div>
             </div>
             <div class="buttons flex items-center justify-end gap-3 mt-7">
-              <button class="py-2.5 px-7"> مشاوره خرید</button>
-              <button class="py-2.5 px-2.5 ">
-                <icons-heart/>
-              </button>
+              <button class="py-2.5 px-7" @click=" buyAdvisor=true "> مشاوره خرید</button>
+              <transition name="transition">
+                <lazy-buy-advisor @closeBuyAdvisor="closeBuyAdvisor" v-if="buyAdvisor"/>
+              </transition>
             </div>
           </div>
         </div>
       </div>
     </header>
     <main>
-      <div class="category my-5 " data-aos="fade-up">
+      <div class="category my-5 pb-1.5 md:pb-3.5 pb " data-aos="fade-up">
         <div class="category-list flex gap-5 justify-start md:justify-center">
           <label for="Introduction">
             <input type="radio" class="hidden " name="category" checked id="Introduction">
@@ -378,12 +386,8 @@ function toContent(item){
                   <span class="total-score-standard">از 5</span>
                 </div>
                 <div class="create-comment flex flex-col gap-3 mb-7">
-                  <button class="py-2 relative hover:cursor-pointer w-1/3 mx-auto md:w-full  "> ثبت نظر</button>
+                  <button @click="messageCommentModal=true" class="py-2 relative hover:cursor-pointer w-1/3 mx-auto md:w-full  "> ثبت نظر</button>
                   <p>با ارسال دیدگاه خود به انتخاب خریداران دیگر کمک کنید .</p>
-                </div>
-                <div class="comments-score px-5 py-7 grid grid-cols-12 md:flex flex-col gap-2 md:gap-10">
-                  <lazy-comments-score class="col-span-6" v-for="(item , index) in commentsScore" :key="index"
-                                       :data="item" :index="index"/>
                 </div>
               </div>
             </div>
@@ -404,6 +408,11 @@ function toContent(item){
         </div>
       </div>
     </main>
+    <div>
+      <transition name="transition">
+      <comments-write @closeMessage="closeMessage" v-if="messageCommentModal"/>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -546,9 +555,12 @@ function toContent(item){
     a {
       position: relative;
       font-size: 20px;
-      line-height: 60px;
+      //line-height: 60px;
       color: #000;
-
+      @media screen and (max-width: 768px) {
+        font-size: 12px;
+        line-height: 15px;
+      }
       &:after {
         position: absolute;
         bottom: -18px;
@@ -560,6 +572,9 @@ function toContent(item){
         transition: 0.5s;
         background: #AE7BB6;
         transform-origin: center;
+        @media screen and (max-width: 768px) {
+          bottom: -12px;
+        }
       }
     }
 
@@ -576,6 +591,10 @@ function toContent(item){
   font-weight: 700;
   color: #5E2E66;
   line-height: 60px;
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+    line-height: 30px;
+  }
 }
 
 .details-body {
@@ -709,4 +728,17 @@ function toContent(item){
     }
   }
 }
+.transition-enter-active {
+  transition: 0.5s ease;
+}
+
+.transition-leave-active {
+  transition: 0.8s ease;
+}
+
+.transition-enter-from, .transition-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
 </style>
