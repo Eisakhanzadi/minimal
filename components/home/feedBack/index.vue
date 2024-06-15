@@ -45,7 +45,7 @@ import {Pagination} from 'swiper/modules';
 .swiper {
   position: relative;
   width: 100%;
-  padding:  20px;
+  padding:10px  20px;
 
   &:after {
     position: absolute;
