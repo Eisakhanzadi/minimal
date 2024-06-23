@@ -3,16 +3,16 @@ const props = defineProps(['data' , 'count'])
 </script>
 
 <template>
-<div class="card grid grid-cols-12 gap-5 ">
+<nuxt-link :to="`/weblog/${data.id}`" v-if="data.id" class="card grid grid-cols-12 gap-5 ">
   <div class="card-header col-span-3 lg:col-span-4 flex items-center relative">
     <span class="w-10 h-10 flex items-center justify-center absolute right-[30%] lg:right-[5%] xl:right-[20%] top-[50%] transform translate-y-[-50%] translate-x-[50%]  rounded">{{count+1}}</span>
-    <img src="/public/image/offers/5.png"  alt="" class=" ms-auto w-[110px] h-[110px]">
+    <img v-if="data.image.url && data.title" :src="data.image.url"  :alt="data.title" class=" ms-auto w-[110px] h-[110px]">
   </div>
   <div class="body col-span-9 lg:col-span-8">
-    <div class="category flex items-center gap-1.5"><h5>{{data.category}}</h5></div>
-    <nuxt-link :to="data.url" class="title"><h4>{{data.title}}</h4></nuxt-link>
+    <div class="category flex items-center gap-1.5" v-if="data.category.title"><h5>{{data.category.title}}</h5></div>
+    <div  class="title" v-if="data.title"><h4>{{data.title}}</h4></div>
   </div>
-</div>
+</nuxt-link>
 </template>
 
 <style scoped lang="scss">

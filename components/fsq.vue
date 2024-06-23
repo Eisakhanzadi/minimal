@@ -25,10 +25,10 @@ onMounted(()=>{
       <div class="collapse-container  flex flex-col px-4 " ref="collapses"
            v-for="(item , index) in data"  :key="index" :class="{'active-collapse': defaultOpen === index }"  >
         <div class="collapse-title hover:cursor-pointer flex justify-between items-center py-4"  @click="showCollapse(index)">
-          <h4>{{ item.name }}</h4>
+          <h4 v-if="item.question">{{ item.question }}</h4>
         </div>
         <div class="collapse-body" >
-          <p class="py-3">{{ item.text }}</p>
+          <p class="py-3" v-if="item.reply">{{ item.reply }}</p>
         </div>
       </div>
     </div>

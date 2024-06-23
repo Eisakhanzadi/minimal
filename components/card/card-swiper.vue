@@ -4,25 +4,23 @@ const {data} = props
 </script>
 
 <template>
-  <div class="card grid grid-cols-12 mx-auto gap-5">
+  <nuxt-link :to="`/weblog/${data.id}`" class="card grid grid-cols-12 mx-auto gap-5" v-if="data">
     <div class="card-header col-span-6">
       <figure class="h-full w-full">
-        <img :src="data.image" class="w-full h-full" :alt="data.title">
+        <img :src="data.image.url" class="w-full h-full" :alt="data.title">
       </figure>
     </div>
     <div class="card-body col-span-6 flex flex-col gap-1 md:gap-2.5">
-      <div class="title"  ><h2>{{ data.title }}</h2></div>
+      <div class="title"  ><h2 v-if="data.title">{{ data.title }}</h2></div>
       <div class="info">
-        <div class="date"><span class="icon"><i class="fa-solid fa-calender"/></span><span class="time">{{
-            data.time
-          }}</span></div>
+        <div class="date" v-if="data.created_at.length"><span class="icon"><i class="fa-solid fa-calender"/></span><span class="time">{{data.created_at.split(" ")[0] }}</span></div>
       </div>
-      <div class="card-text text-justify"><p>{{ data.text }}</p></div>
-      <nuxt-link :to="data.url" class="more  ms-auto mt-auto lg:mb-3">
+      <div class="card-text text-justify" v-if="data.summary"><p>{{ data.summary }}</p></div>
+      <nuxt-link :to="`/weblog/${data.id}`" class="more  ms-auto mt-auto lg:mb-3">
         <button>مشاهده بیشتر</button>
       </nuxt-link>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <style scoped lang="scss">

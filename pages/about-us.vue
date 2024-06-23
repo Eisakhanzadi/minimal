@@ -1,137 +1,52 @@
 <script setup>
-/*minimal team image*/
-import mohamad from 'public/image/minimal-team/mohmad.png'
-import ati from 'public/image/minimal-team/ati.png'
-import najme from 'public/image/minimal-team/najme.png'
-import ebi from 'public/image/minimal-team/ebi.png'
-import fati from 'public/image/minimal-team/fati.png'
-import mehdi from 'public/image/minimal-team/mehdi.png'
-/* career-opportunities */
-import imageOne from 'public/image/career-opportunities/1.png'
-import imageTwo from 'public/image/career-opportunities/2.png'
-
+import {useAboutUsStore} from "~/store/aboutus.js";
+import {useToast} from "vue-toastification";
+const formId = ref(null)
 const showModal = ref(false)
 const breadCrumb = [
   {
     name: 'درباره ما'
   }
 ]
-const data = {
-  text: `
-  تک نفره ی مدرن مبل تک نفره چوبی با جدید ترین طراحی
-و با استفاده از بهترین متریال مصرفی ارائه می شود. توجه توجه پارچه مبل بصورت ساده میباشد کلاف استفاده شده در ساخت این محصول تماما چوب مرغوب و مستحکم روس می باشد.در پایه های این محصول از چوب خودرنگروس استفاده شده که علاوه بر نمای چوبی زیبا دوام بالایی نیز دارد.اسفنج مصرفی در قسمت نشیمن محصول اسفنج 35 کیلویی ویژه که مرغوب ترین نوع اسفنج است استفاده شده
- که نشیمنی راحت و با دوام را به ارمغان می اورد.
-پارچه ی انتخاب شده برای این محصول پارچه ی مرغوب بوده که در سبک مدرن کاربرد زیادی دارد که ضمن زیبایی با ویژگی قابلیت شست و شوی انتخابی مناسب محسوب می شود.در مجموع این محصول با نمایی ساده و جذاب,نشیمنی راحت و کیفیتی بالا,انتخابی ایده ال برای دوستداران مبلمان مدرن می باشد.
-  تک نفره ی مدرن مبل تک نفره چوبی با جدید ترین طراحی و با استفاده از بهترین متریال مصرفی ارائه می شود. توجه توجه پارچه مبل بصورت ساده میباشد کلاف استفاده شده در ساخت این محصول تماما چوب مرغوب و مستحکم روس می باشد.در پایه های این محصول از چوب خودرنگروس استفاده شده که علاوه بر نمای چوبی زیبا دوام بالایی نیز دارد.اسفنج مصرفی در قسمت نشیمن محصول اسفنج 35 کیلویی ویژه که مرغوب ترین نوع اسفنج است استفاده شده که نشیمنی راحت و با دوام را به ارمغان می اورد.پارچه ی انتخاب شده برای این محصول پارچه ی مرغوب بوده که در سبک مدرن کاربرد زیادی دارد
-  `,
-  team: [
-    {
-      name: "محمد کتولی",
-      role: "رئیس هیئت مدیره",
-      image: mohamad
-    },
-    {
-      name: "محمد ابراهیمی",
-      role: "هیئت مدیره",
-      image: ebi
-    },
-    {
-      name: "نجمه حیسنی",
-      role: "مدیر داخلی",
-      image: najme
-    },
-    {
-      name: "مهدی حسینی",
-      role: "طراح گرافیک",
-      image: mehdi
-    },
-    {
-      name: "عاطمه احمدی ",
-      role: "حسابدار",
-      image: ati
-    },
-    {
-      name: "فاطمه رهبر",
-      role: "مسئول فروش",
-      image: fati
-    },
-  ],
-  frequentlyAskedQuestion: [
-    {
-      name: "جنس کف مبلمان از چیست؟",
-      text: "قطعا با توجه به فضای منزلتان، خودتان بهتر می‌توانید نظر بدهید اما به طور معمول مبل‌های راحتی برای هر متراژی مناسب است. مبل‌های کلاسیک برای منازلی با متراژهای نسبتا بالا و مبل های ال برای منازل کوچک می‌تواند گزینه‌ی مناسبی باشد."
-    },
-    {
-      name: "جنس کلاف مبلمان از چیست؟",
-      text: "قطعا با توجه به فضای منزلتان، خودتان بهتر می‌توانید نظر بدهید اما به طور معمول مبل‌های راحتی برای هر متراژی مناسب است. مبل‌های کلاسیک برای منازلی با متراژهای نسبتا بالا و مبل های ال برای منازل کوچک می‌تواند گزینه‌ی مناسبی باشد."
-    },
-    {
-      name: "مبلمان راحتی ، کلاسیک یا ال کدام مناسب تر است ؟",
-      text: "قطعا با توجه به فضای منزلتان، خودتان بهتر می‌توانید نظر بدهید اما به طور معمول مبل‌های راحتی برای هر متراژی مناسب است. مبل‌های کلاسیک برای منازلی با متراژهای نسبتا بالا و مبل های ال برای منازل کوچک می‌تواند گزینه‌ی مناسبی باشد."
-    },
-    {
-      name: "آماده سازی مبلمان چه مقدار زمان میبرد؟",
-      text: "قطعا با توجه به فضای منزلتان، خودتان بهتر می‌توانید نظر بدهید اما به طور معمول مبل‌های راحتی برای هر متراژی مناسب است. مبل‌های کلاسیک برای منازلی با متراژهای نسبتا بالا و مبل های ال برای منازل کوچک می‌تواند گزینه‌ی مناسبی باشد."
-    },
-    {
-      name: "آیا امکان تغییر رنگ چوب وجود دارد؟",
-      text: "قطعا با توجه به فضای منزلتان، خودتان بهتر می‌توانید نظر بدهید اما به طور معمول مبل‌های راحتی برای هر متراژی مناسب است. مبل‌های کلاسیک برای منازلی با متراژهای نسبتا بالا و مبل های ال برای منازل کوچک می‌تواند گزینه‌ی مناسبی باشد."
-    },
-  ],
-  careerOpportunities: {
-    text: "تک نفره ی مدرن مبل تک نفره چوبی با جدید ترین طراحی و با استفاده از بهترین متریال مصرفی ارائه می شود. توجه توجه پارچه مبل بصورت ساده میباشد کلاف استفاده شده در ساخت این محصول تماما چوب مرغوب و مستحکم روس می باشد.در پایه های این محصول از چوب خودرنگروس استفاده شده که علاوه بر نمای چوبی زیبا دوام بالایی نیز دارد.اسفنج مصرفی در قسمت نشیمن محصول اسفنج 35 کیلویی ویژه که مرغوب ترین نوع اسفنج است استفاده شده که نشیمنی راحت و با دوام را به ارمغان می اورد.پارچه ی انتخاب شده برای این محصول پارچه ی مرغوب بوده که در سبک مدرن کاربرد زیادی دارد"
-    ,
-    image: {
-      one: imageOne,
-      two: imageTwo
-    }
-  },
-  roles: [
-    {
-      title: "کارشناس بخش روابط عمومی",
-      promise: "تمام وقت",
-      work: "6الی 14 - 17 الی 22",
-      write: "یک هفته قبل"
-    },
-    {
-      title: "طراح گرافیک",
-      promise: "تمام وقت",
-      work: "6الی 14 - 17 الی 22",
-      write: ""
-    },
-    {
-      title: "مدیر فروش",
-      promise: "تمام وقت",
-      work: "6الی 14 - 17 الی 22",
-      write: "یک هفته قبل"
-    },
-    {
-      title: "نماینده فروش ",
-      promise: "تمام وقت",
-      work: "6الی 14 - 17 الی 22",
-      write: ""
-    },
-    {
-      title: "حسابدار",
-      promise: "تمام وقت",
-      work: "6الی 14 - 17 الی 22",
-      write: "یک هفته قبل"
-    },
-    {
-      title: "کارشناس تولید محتوا",
-      promise: "تمام وقت",
-      work: "6الی 14 - 17 الی 22",
-      write: ""
-    },
-  ]
-
-
-}
-
-
-function showForm() {
+const store = useAboutUsStore()
+store.fetchAboutUsData()
+store.fetchTeamsData()
+store.fetchFaqData()
+store.fetchJobOffersData()
+function showForm(id) {
+  console.log(id)
+  formId.value = id
   showModal.value = !showModal.value
 }
+async function closeForm(form){
+  console.log(form)
+  const formData = new FormData()
+  formData.append( 'name', form.name)
+  formData.append( 'description', form.description)
+  formData.append( 'mobile', form.mobile)
+  formData.append( 'file', form.file)
+  formData.append( 'job_id', form.job_id)
+  const {data , status , error } = await useFetch(()=>`https://minimal.foodavaran.com/api/resumes` , {
+    method:'POST',
+    body:formData
+  })
+  if (status.value === 'success'){
+    showModal.value = !showModal.value
+    console.log(data.value)
+    useToast().success ('رزومه شما با موفقیت ارسال شد. ')
+
+  }
+  if (error.value){
+    console.log(formData)
+    console.log(error)
+    useToast().error ( error.value.data.message !=  "!شما یک بار رزومه برای این شغل ارسال کردید "? 'ارسال رزمه با خظا مواجه شد لطفا لحظاتی دیگر مجددا تلاش کنید .' : error.value.data.message )
+    showModal.value = !showModal.value
+  }
+}
+const aboutUs = computed(()=>store.getAboutUSData.filter(item=>item.group==='about'))
+const teams = computed(()=>store.getTeamData)
+const faq = computed(()=>store.getFaqData)
+const jobOffers = computed(()=>store.getJobOffersData)
 </script>
 
 <template>
@@ -152,11 +67,11 @@ function showForm() {
           </div>
         </div>
         <div class="md:col-span-2"></div>
-        <div class="image col-span-12 md:col-span-8"><img class="w-full" src="/public/image/about-us/1.png" alt=""></div>
+        <div class="image col-span-12 md:col-span-8"><img class="w-full" :src="aboutUs.filter(item=>item.name === 'aboutUs-image-primary')[0].value" :alt="aboutUs.filter(item=>item.name === 'aboutUs-image-primary')[0].label"></div>
       </div>
     </div>
     <div class="container px-5 mx-auto mt-10">
-      <p v-html="data.text"></p>
+      <p class="text-justify" v-if="aboutUs">{{aboutUs.filter(item=>item.name === 'about-minimal')[0].value}}</p>
     </div>
     <main class=" flex flex-col gap-10 mb-10">
       <div class="minimal-team container px-5 mx-auto mt-10">
@@ -164,42 +79,42 @@ function showForm() {
           <h2>تیم ما</h2>
         </div>
         <ul class="grid grid-cols-12 gap-5">
-          <li class=" col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2" v-for="(item , index) in data.team"
+          <li  class=" col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2" v-if="teams.length" v-for="(item , index) in teams"
               :key="index">
-            <div class="card flex flex-col gap-5">
-              <img :src="item.image" alt="item.name">
+            <div class="card flex flex-col gap-5" >
+              <img v-if="item.image.url" :src="item.image.url" alt="item.name">
               <div class="body text-center py-2 flex flex-col gap-1.5">
-                <h3>{{ item.name }}</h3>
-                <span>{{ item.role }}</span>
+                <h3 v-if="item.name">{{ item.name }}</h3>
+                <span v-if="item.role">{{ item.role }}</span>
               </div>
             </div>
           </li>
         </ul>
       </div>
       <article class="flex flex-col gap-5">
-        <fsq :data="data.frequentlyAskedQuestion"/>
+        <fsq v-if="faq" :data="faq"/>
         <div class="career-opportunities my-10">
           <h3 class="career-opportunities-title my-7 container px-5 mx-auto">فرصت های شغلی</h3>
-          <div class="career-opportunities-body after:w-[65%] lg:after:w-[66%]  px-1 py-5  relative ">
-            <div class="container mx-auto grid grid-cols-12 gap-5 h-full px-5 ">
-              <div class="text col-span-6 lg:col-span-6  text-justify"><p>{{data.careerOpportunities.text}}</p></div>
+          <div class="career-opportunities-body after:w-[65%] lg:after:w-[66%] px-1 py-5 relative ">
+            <div class="container mx-auto grid grid-cols-12 gap-5 h-full px-5">
+              <div class="text col-span-6 lg:col-span-6  text-justify"><p>{{aboutUs.filter(item=>item.name === 'about-minimal')[0].value}}</p></div>
               <div class="col-span-6 flex flex-col-reverse lg:justify-between lg:flex-row gap-5 lg:gap-8 pe-5 lg:pe-0   ">
-                <div class="w-full my-auto h-full lg:w-fit lg:h-fit lg:ms-auto mb-auto   "><img class="w-full h-full  " :src="data.careerOpportunities.image.one" alt=""></div>
-                <div class=" md:self-end my-auto h-full lg:w-fit lg:h-fit lg:ms-auto self-end "><img class="w-full h-full" :src="data.careerOpportunities.image.two" alt=""></div>
+                <div class="w-full my-auto h-full lg:w-fit lg:h-fit lg:ms-auto mb-auto"><img class="w-full h-full" :src="aboutUs.filter(item=>item.name === 'aboutUs-imageOne')[0].value" :alt="aboutUs.filter(item=>item.name === 'aboutUs-imageOne')[0].label"></div>
+                <div class=" md:self-end my-auto h-full lg:w-fit lg:h-fit lg:ms-auto self-end "><img class="w-full h-full" :src="aboutUs.filter(item=>item.name === 'aboutUs-imageTwo')[0].value" :alt="aboutUs.filter(item=>item.name === 'aboutUs-imageTwo')[0].label"></div>
               </div>
             </div>
           </div>
         </div>
         <div class="roles container px-5 mx-auto ">
-          <div class="grid grid-cols-12 gap-5">
+          <div class="grid grid-cols-12 gap-5" v-if="jobOffers&&jobOffers.length">
             <card-role @show-modal="showForm" class=" col-span-6 lg:col-span-4 xl:col-span-3"
-                       v-for="(item , index) in data.roles" :data="item" :key="index"/>
+                       v-for="(item , index) in jobOffers" :data="item" :key="index"/>
           </div>
         </div>
       </article>
       <div>
         <transition name="form">
-          <Form v-if="showModal" @close="showForm" theme="modal"/>
+          <Form v-if="showModal" @close="showModal = false" @sendData="closeForm"  theme="modal" :id="formId"/>
         </transition>
       </div>
     </main>

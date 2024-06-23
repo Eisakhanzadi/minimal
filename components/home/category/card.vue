@@ -4,26 +4,26 @@ const {data, theme} = props
 </script>
 
 <template>
-  <div class="card flex flex-col items-center justify-center gap-2 hover:cursor-pointer">
+  <nuxt-link :to="{path:'/products/' , query:{category_id:data.id}}" class="card flex flex-col items-center justify-center gap-2 hover:cursor-pointer">
     <div class="card-header">
       <div class="image">
-        <figure class=" md:w-full md:h-full " :class="`${theme==='category' ? 'w-16 h-16' : ''}`" >
-          <img :src="data.img" :alt="data.name" class="w-full h-full object-cover+">
+        <figure v-if="data.image" class=" md:w-full md:h-full " :class="`${theme==='category' ? 'w-16 h-16' : ''}`" >
+          <img v-if="data.image.url && data.image.name" :src="data.image.url" :alt="data.image.name" class="w-full h-full object-cover+">
         </figure>
       </div>
     </div>
     <div :class="`card-body  ${theme !== 'offer' ? 'text-center': ''} `">
-      <nuxt-link :to="data.url" class="content flex flex-col gap-1.5">
-        <div class="title">
-          <h2>{{ data.name }}</h2>
+      <div  class="content flex flex-col gap-1.5">
+        <div class="title" v-if="data.title">
+          <h2>{{ data.title }}</h2>
         </div>
         <div class="card-text flex gap-2 justify-center">
           <span>تعداد</span>
-          <span>{{ data.info }}</span>
+          <span v-if="data.products_count">{{ data.products_count }}</span>
         </div>
-      </nuxt-link>
+      </div>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <style scoped lang="scss">

@@ -7,18 +7,18 @@ const {data} = props
   <div class="card grid grid-cols-12 mx-auto gap-5">
     <div class="card-header col-span-12 md:col-span-7">
       <figure>
-        <img :src="data.image" class="w-full " :alt="data.title">
+        <img :src="data.image.url" class="w-full " :alt="data.title">
       </figure>
     </div>
     <div class="card-body col-span-12 md:col-span-5 flex flex-col gap-2 md:gap-5">
       <div class="title"><h2>{{ data.title }}</h2></div>
       <div class="info flex gap-5">
         <div class="author flex gap-2">
-          <span class="icon"><i class="fa-solid fa-user"/></span><span class="name">{{ data.author }}</span>
+          <span class="icon"><i class="fa-solid fa-user"/></span><span class="name">{{ data.writer }}</span>
         </div>
-        <div class="date"><span class="icon"><i class="fa-solid fa-calender"/></span><span class="time">{{ data.time }}</span></div>
+        <div class="date"><span class="icon"><i class="fa-solid fa-calender"/></span><span v-if="data.created_at" class="time">{{ data.created_at.split(' ')[0] }}</span></div>
       </div>
-      <div class="card-text text-justify"><p>{{ data.text }}</p></div>
+      <div class="card-text text-justify"><p>{{ data.summary.substr(0,300)+'...' }}</p></div>
       <div class="more ms-auto">
         <button>مشاهده بیشتر</button>
       </div>

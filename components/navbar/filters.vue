@@ -2,21 +2,23 @@
 const props = defineProps([
   "data",
   'theme',
-  'filter'
+  'filter',
+    'index'
 ])
-const emit = defineEmits(['setQuery'])
+const emit = defineEmits(['setQuery' , 'filterActive'])
 const items = ref(null)
 
 onMounted(() => {
-  items.value[props.theme].classList.add('active')
+  items.value[props.index].classList.add('active')
 })
 
-function handleActive(index,name) {
+function handleActive(index,query) {
   items.value.forEach(item => {
     item.classList.remove('active')
   })
   items.value[index].classList.add('active')
-  emit('setQuery' , name)
+  emit('filterActive' , index)
+  emit('setQuery' , query)
 }
 </script>
 
@@ -24,9 +26,9 @@ function handleActive(index,name) {
 
   <ul :class="`nav flex gap-3 md:gap-5 items-center ${props.filter ==='product'? 'productPage ' : 'indexPage'  }`">
     <li class="flex items-center pb-2"><span class="icon"><lazy-icons-filter/></span><span class="title">دسته بندی بر اساس :</span></li>
-    <li class="nav-list  pb-2 hover:cursor-pointer " ref="items" @click="handleActive(index,item.name)"
+    <li class="nav-list  pb-2 hover:cursor-pointer " ref="items" @click="handleActive(index,item.query)"
         v-for="(item , index) in data" :key="index" >
-      <nuxt-link class="nav-item">{{ item.name }}</nuxt-link>
+      <nuxt-link class="nav-item">{{ item.title }}</nuxt-link>
     </li>
   </ul>
 

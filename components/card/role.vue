@@ -2,25 +2,33 @@
 const props = defineProps(['data'])
 const {data:object} = props
 const emit = defineEmits(['showModal'])
+const time = new Date()
+const Time = {
+  year:time.getFullYear(),
+  mount:time.getMonth(),
+  day:time.getDay(),
+  fullTime(){
+    return `${this.year}-${this.mount}-${this.day}`
+  }
+}
 </script>
 
 <template>
-<div class="card flex flex-col gap-y-3 px-6 py-8">
+<div class="card flex flex-col gap-y-3 px-6 py-8" :class="{isActive:data.status != 1}" >
   <div class="card-body flex flex-col items-center gap-1.5 md:gap-3">
-    <div  class="title"><h4>{{data.title}}</h4></div>
+    <div  class="title text-center"><h4>{{data.title}}</h4></div>
     <div class=" promise flex gap-1.5">
       <span>قرارداد : </span>
-      <span> {{data.promise}} </span>
+      <span> {{data.type === "full-time" ? 'تمام وقت' : 'نیمه وقت'}} </span>
     </div>
     <div class="work-time flex gap-1.5">
       <span>ساعت کاری : </span>
-      <span> {{data.work}} </span>
+      <span> {{data.times}} </span>
     </div>
   </div>
   <div class="card-footer flex justify-between items-center mt-5">
-    <div class="write">{{data.write}}</div>
-
-    <button class="ms-auto border px-6 py-1" @click="emit('showModal' , data )">ارسال رزومه</button>
+<!--    <div class="write">{{data.write}}</div>-->
+    <button class="ms-auto border px-6 py-1" :disabled="data.status != 1" @click="emit('showModal' , data.id )">ارسال رزومه</button>
   </div>
 </div>
 </template>
@@ -99,6 +107,41 @@ const emit = defineEmits(['showModal'])
         height: 20px;
         background: #FFFFFF;
         transform: translate(-50% ,-50%);
+      }
+    }
+  }
+  .isActive{
+    opacity: 0.3;
+    button {
+      &:hover {
+        background: #FFFFFF;
+        color: #000;
+        z-index: 0;
+        border-color: rgba(199, 199, 199, 0.50);
+        &:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          right: 0;
+          width: 10px;
+          height: 20px;
+          background: #fff;
+          transform: translate(50%, -50%);
+          z-index: 1;
+          display: block;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          width: 10px;
+          height: 20px;
+          background: #FFFFFF;
+          transform: translate(-50%, -50%);
+          display: block;
+        }
       }
     }
   }

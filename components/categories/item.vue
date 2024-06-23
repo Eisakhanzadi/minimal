@@ -6,7 +6,7 @@ const  props = defineProps(['items'])
 <div>
   <ul class="grid gap-3">
     <li v-for="(item ,index) in items " :key="index" class="text-center ">
-      <nuxt-link to="" > {{item.name}} </nuxt-link>
+      <nuxt-link :to="{path:'/weblog' , query:{category_id:item.id}}" > {{item.title}} </nuxt-link>
     </li>
   </ul>
 </div>

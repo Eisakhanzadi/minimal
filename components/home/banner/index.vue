@@ -14,16 +14,13 @@
       :modules="[]"
       class="mySwiper "
   >
-    <swiper-slide >
-      <img src="/public/image/home/banner.png" class="w-full" alt="">
+    <swiper-slide v-for="(item, index) in data" :key="index">
+      <nuxt-link :to="item.link" class="card">
+        <div>
+          <img :src="item.image.url" class="w-full" :alt="item.image.name">
+        </div>
+      </nuxt-link>
     </swiper-slide>
-    <swiper-slide >
-      <img src="/public/image/home/banner.png" class="w-full" alt="">
-    </swiper-slide>
-    <swiper-slide >
-      <img src="/public/image/home/banner.png" class="w-full" alt="">
-    </swiper-slide>
-
   </swiper>
 </template>
 <script setup>
@@ -31,7 +28,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination'
 import {Pagination} from 'swiper/modules';
-
+const props = defineProps(['data'])
 </script>
 <style scoped>
 .swiper{

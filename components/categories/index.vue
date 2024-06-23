@@ -22,17 +22,17 @@ function add(c){
       ref="parent">
     <div class="flex  justify-between w-full">
       <nuxtLink :to="props.data.link" @click="add(props.data.name)">
-        <span>{{ props.data.name }}</span>
+        <span>{{ props.data.title }}</span>
       </nuxtLink>
-      <div class="navbar-mobile-icon">
-        <span v-if="props.data.sub && props.data.sub.length" class="icon" @click="show"></span>
+      <div class="navbar-mobile-icon ">
+        <span v-if="props.data.children && props.data.children.length" class="icon flex justify-center items-center p-2 cursor-pointer " @click="show"></span>
       </div>
     </div>
-    <div class="sub-menu overflow-hidden" v-if="props.data.sub && props.data.sub.length " ref="child">
+    <div class="sub-menu overflow-hidden" v-if="props.data.children && props.data.children.length " ref="child">
       <ul class="nav w-full overflow-hidden">
         <transition-group name="transition">
-          <categories v-if="props.data.sub && showList" v-for="(item , index) in props.data.sub" :key="index" :data="item"
-                  :theme="props.data.sub.length ? true : false"/>
+          <categories v-if="props.data.children && showList" v-for="(item , index) in props.data.children" :key="index" :data="item"
+                  :theme="props.data.children.length ? true : false"/>
         </transition-group>
       </ul>
     </div>

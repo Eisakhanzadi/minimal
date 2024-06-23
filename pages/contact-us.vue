@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import {useContactUsStore} from "~/store/contactUs";
+import {useToast} from "vue-toastification";
+const config = useRuntimeConfig()
+const formData = new FormData()
 const data = {
   text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت ...",
   info: {
@@ -24,6 +28,31 @@ const breadcrumb = [
     name: 'تماس با ما'
   }
 ]
+const store = useContactUsStore()
+store.fetchContactUsData()
+const contactUs = computed(()=>store.getContactUsData.filter(item=>item.group === 'contact'))
+const socialApp = computed(()=>store.getContactUsData.filter(item=>item.group === 'social'))
+
+async function sendData(form){
+  console.log(config.public.baseUrl)
+  formData.append('name',form.name)
+  formData.append('mobile',form.mobile)
+  formData.append('description',form.description)
+  formData.append('email',form.email)
+  const {status , error , pending} = await useFetch(()=>`https://minimal.foodavaran.com/api/tickets` , {
+    method:'POST',
+    body:formData
+  })
+  if (error.value){
+    console.log(error.value)
+    useToast().error (error.value.data.message?error.value.data.message:null)
+  }
+  if (status.value === 'success'){
+    console.log('success')
+   useToast().success ('از اینکه مارا در خدمات رسانی بهتر یاری کردید متشکریم. ')
+
+  }
+}
 </script>
 
 <template>
@@ -36,10 +65,10 @@ const breadcrumb = [
         <div class="contact-us-title"><h1>تماس با ما </h1></div>
         <div class="grid grid-cols-12 items-start text-justify gap-7">
           <div class="col-span-12 lg:col-span-6 mt-7">
-            <p>{{ data.text }}</p>
+            <p v-if="contactUs.filter(item => item.name === 'contactUs-text')[0] " >{{ contactUs.filter(item => item.name === 'contactUs-text')[0].value }}</p>
           </div>
           <div class="image col-span-12 lg:col-span-6">
-            <img src="/public/image/contactus/Artboard%201%201%20(1).png" class="w-full h-full" alt="">
+            <img v-if="contactUs.filter(item => item.name === 'contactUs-image')[0]"  :src="contactUs.filter(item => item.name === 'contactUs-image')[0].value" class="w-full h-full" :alt="contactUs.filter(item => item.name === 'contactUs-image')[0].label">
           </div>
         </div>
       </div>
@@ -47,31 +76,34 @@ const breadcrumb = [
         <ul class=" grid grid-cols-12 gap-4">
           <li class="col-span-6 py-3 px-3 flex gap-1.5 items-center">
             <h5> پشتیبانی وبسایت :</h5>
-            <span>{{ data.info.support }}</span>
+            <span v-if="contactUs.filter(item => item.name === 'support-time')[0]" >{{ contactUs.filter(item => item.name === 'support-time')[0].value }}</span>
           </li>
           <li class="col-span-6 py-3 px-3 flex gap-1.5 items-center">
             <h5>شماره تماس :</h5>
-            <a :href="`tel:${data.info.call}`">{{ data.info.call }}</a>
+            <a v-if="contactUs.filter(item => item.name === 'phone-number')[0]"  :href="`tel:${contactUs.filter(item => item.name === 'phone-number')[0].value}`">{{ contactUs.filter(item => item.name === 'phone-number')[0].value }}</a>
           </li>
           <li class="col-span-6 py-3 px-3 flex gap-1.5 items-center">
             <h5>ساعت کاری حضوری فروشگاه :</h5>
-            <span>{{ data.info.work }}</span>
+            <span v-if="contactUs.filter(item => item.name === 'work-time')[0]" >{{ contactUs.filter(item => item.name === 'work-time')[0].value }}</span>
           </li>
           <li class="col-span-6 py-3 px-3 flex gap-1.5 items-center">
             <h5> شبکه های اجتماعی :</h5>
-            <ul class="social-app">
+            <ul class="social-app flex items-center gap-4 mx-2">
               <li>
-                <nuxtLink>{{}}</nuxtLink>
+                <nuxtLink v-if="socialApp.filter(item=>item === 'telegram')[0]"  :to="socialApp.filter(item=>item === 'telegram')[0].value"><icons-telegram/></nuxtLink>
+              </li>
+              <li>
+                <nuxtLink v-if="socialApp.filter(item=>item === 'instagram')[0]"  :to="socialApp.filter(item=>item === 'instagram')[0].value"><icons-instagram/></nuxtLink>
               </li>
             </ul>
           </li>
           <li class="col-span-12 py-3 px-3 flex gap-1.5 items-center">
             <h5> آدرس فروشگاه مرکزی :</h5>
-            <span>{{ data.info.address }}</span>
+            <span v-if="contactUs.filter(item => item.name === 'address')[0]" >{{ contactUs.filter(item => item.name === 'address')[0].value }}</span>
           </li>
         </ul>
       </div>
-      <Form :theme="true"/>
+      <Form :theme="true" @sendData="sendData"  />
     </div>
   </div>
 </template>

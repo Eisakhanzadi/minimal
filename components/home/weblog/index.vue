@@ -6,12 +6,12 @@ const {data} = props
 <template>
   <div class="backdrop-weblog pt-10 pb-14">
     <div class="pt-5  lg:pt-10">
-      <div class="text-center title"><h2>{{ data.title }}</h2></div>
-      <div class="text-center sub-title"><p>{{ data.subTitle }}</p></div>
+      <div class="text-center title"><h2>آخرین بلاگ ها</h2></div>
+      <div class="text-center sub-title"><p>موضوعاتی درباره مبل ها و چیدمان آنها که جذاب است</p></div>
     </div>
     <div class="container px-5 flex flex-col gap-10 mt-8 mx-auto">
       <swiper-dynamic direction='vertical' :grid="2" >
-        <swiper-slide v-for="(item,index) in data.content" :key="index" class="h-fit my-auto">
+        <swiper-slide v-for="(item,index) in data" :key="index" class="h-fit my-auto">
           <home-weblog-card :data="item"/>
         </swiper-slide>
       </swiper-dynamic>

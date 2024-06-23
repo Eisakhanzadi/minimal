@@ -1,12 +1,10 @@
 <script setup lang="ts">
-
 import {VueAwesomePaginate} from "vue-awesome-paginate";
 import CategoryIcon from "~/components/icons/category-icon.vue";
 import {SwiperSlide} from "swiper/vue";
+const searchInput = ref("")
 /*weblog image*/
-import weblogOne from '@/public/image/weblog/Rectangle 17 (1).png'
-import weblogTwo from '@/public/image/weblog/Rectangle 18 (1).png'
-
+import {useWeblogStore} from "~/store/weblog";
 const categoryItems = ref(null)
 const currentPage = ref(1)
 const category = [
@@ -42,26 +40,12 @@ function activeItem(index) {
   categoryItems.value[index].classList.add('active-category-item')
 }
 
-const weblog = {
-  title: "آخرین بلاگ ها",
-  subTitle: "موضوعاتی درباره مبل ها و چیدمان آنها که جذاب است",
-  content: [
-    {
-      title: "چگونه مبل خود را بشوییم",
-      image: weblogOne,
-      time: 'یک روز قبل',
-      url:'/weblog/item-1',
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
-    },
-    {
-      title: "چگونه مبل خود را بشوییم",
-      image: weblogTwo,
-      author: "عیسی خانزادی",
-      time: 'یک روز قبل',
-      url:'/weblog/item-2',
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
-    }
-  ]
+const store = useWeblogStore()
+store.fetchWeblogData()
+const weblogPosts = computed(()=>store.getWeblogData)
+
+function searchWeblog(item){
+  console.log(item)
 }
 </script>
 
@@ -72,32 +56,32 @@ const weblog = {
     </div>
     <div class="weblog-title mb-3 lg:mb-7 px-5 container mx-auto "><h1>محبوب ترین بلاگ ها</h1></div>
     <div class="swiper-container my-5 lg:my-10">
-      <swiper-dynamic class="container  mx-auto " :weblog="true">
-        <swiper-slide v-for="(item , index) in weblog.content.length " class="px-5 py-10 md:px-0" :key="index">
-          <card-swiper :data="weblog.content[index]"/>
+      <swiper-dynamic class="container  mx-auto " :weblog="true" v-if="weblogPosts">
+        <swiper-slide v-for="(item , index) in weblogPosts.lastPosts.data " class="px-5 py-10 md:px-0" :key="index">
+          <card-swiper :data="item"/>
         </swiper-slide>
       </swiper-dynamic>
     </div>
     <div class="container mx-auto  grid gap-10  px-5 md:px-0">
       <div class="category-header grid grid-cols-12 gap-5 lg:gap-10 ">
-        <div class="search col-span-4 hidden md:block"><input type="text" class="w-full py-2 px-3" placeholder="جستوجو">
+        <div class="search col-span-4 hidden md:block"><input type="text" class="w-full py-2 px-3" v-model="searchInput" placeholder="جستوجو" @keyup="searchWeblog(this)" >
         </div>
         <div class="category col-span-12 md:col-span-8 flex gap-1.5 items-center ">
           <div class="category-title flex gap-1.5 items-center">
             <span class="icon"><category-icon/></span>
             <h5>دسته بندی :</h5>
           </div>
-          <ul class="flex gap-5 lg:gap-10">
-            <li class="" ref="categoryItems" v-for="(item , index) in category" :key="index" @click="activeItem(index)">
-              <nuxt-link :to="item.url">{{ item.name }}</nuxt-link>
+          <ul class="flex ms-2 gap-5 lg:gap-7" v-if="weblogPosts.postCategories.data && weblogPosts.postCategories.data.length">
+            <li class="" ref="categoryItems" v-for="(item , index) in weblogPosts.postCategories.data.slice(0.4)" :key="index" @click="activeItem(index)">
+              <nuxt-link :to="{path:'/weblog' , query:{category_id:item.id}}">{{ item.title }}</nuxt-link>
             </li>
           </ul>
         </div>
       </div>
-      <div class="grid gap-5">
-        <article class="grid grid-cols-12 gap-5 px-5 sm:px-0 lg:gap-10 ">
-          <card-wash class="col-span-6 md:col-span-4 xl:col-span-3" v-for="(item , index) in 10"
-                     :key="index"></card-wash>
+      <div class="grid gap-5" >
+        <article class="grid grid-cols-12 gap-5 px-5 sm:px-0 lg:gap-10 " v-if="weblogPosts">
+          <card-wash class="col-span-6 md:col-span-4 xl:col-span-3" v-for="(item , index) in weblogPosts.featuredPosts"
+                     :key="index" :data="item"/>
         </article>
         <div class="pagination flex justify-center mb-5 mt-10 ">
           <vue-awesome-paginate
@@ -185,7 +169,7 @@ const weblog = {
       width: 100%;
       height: 3px;
       border-radius: 5px;
-      bottom: -2px;
+      bottom: -40%;
       right: 0;
       background: #AE7BB6;
       display: none;

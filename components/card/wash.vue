@@ -1,25 +1,26 @@
 <script setup lang="ts">
+const props = defineProps(['data'])
 
 </script>
 
 <template>
-<div class="card">
+<nuxt-link :to="`/weblog/${data.id}`" class="card">
   <div class="card-header">
-    <img src="/public/image/weblog/best-1.png"  alt="">
+    <img :src="data.image.url"  :alt="data.title">
   </div>
   <div class="card-body px-3 py-1 md:p-3 grid gap-2">
     <div class=" flex flex-col xl:flex-row md:justify-between md:items-baseline gap-1.5">
       <div class=" col-span-12 flex justify-between items-baseline">
-        <nuxt-link to="/weblog/item-5" class="card-title  ">
-          <h3>چگونه مبل خود را بشوییم ؟</h3>
-        </nuxt-link>
+        <div  class="card-title  ">
+          <h3>{{data.title}}</h3>
+        </div>
       </div>
     </div>
     <div class="card-text">
-      <p>با استفاده از بهترین متریال مصرفی توجه توجه پارچه مبل مستحکم</p>
+      <p>{{data.summary}}</p>
     </div>
   </div>
-</div>
+</nuxt-link>
 </template>
 
 <style scoped>

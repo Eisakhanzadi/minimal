@@ -140,6 +140,7 @@ watch(()=>route.name , ()=>{
     document.body.classList.remove('overflow-hidden')
   }
 })
+const scrollNumber = ref(0)
 function showNavbarMobile(){
   if (process.client){
     document.body.classList.toggle('overflow-hidden')

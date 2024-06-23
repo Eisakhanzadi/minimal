@@ -1,8 +1,9 @@
 <script setup lang="ts">
 const starsBorder = ref(null)
 const starsFill = ref(null)
-
+const emit = defineEmits(['score'])
 function rate(index) {
+  emit('score' , index) /* ارسال مقدار ایندکس برای امتیار دادن */
   /* پاک کردن همه کلاس ها اگر امتیار وارد شده کمتر از قبلی بود*/
   starsFill.value.forEach((item) => {
     item.classList.add('hidden')

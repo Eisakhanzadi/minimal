@@ -8,11 +8,11 @@ const props = defineProps(['data'])
     <div class=" flex items-center gap-5">
       <div class="name">{{data.name}}</div>
       <div class="score flex gap-1">
-        <span>{{data.scoreNumber}}</span>
+        <span>{{data.star}}</span>
         <icons-star/>
       </div>
     </div>
-    <div class="time"><span> {{data.time}} </span></div>
+    <div class="time"><span> {{data.created_at.split(" ")[0]}} </span></div>
   </div>
   <div class="card-body"><p>{{data.text}}</p></div>
 </div>

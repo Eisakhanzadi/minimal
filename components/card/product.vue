@@ -1,30 +1,38 @@
 <script setup lang="ts">
 const props = defineProps(['data', 'theme', 'price'])
 const {data, theme, price} = props
+const routeName = ref(null)
+const route = useRoute()
+if (route.path.includes('weblog')){
+  routeName.value = 'weblog'
+}
+else if (route.path.includes('products')){
+  routeName.value = 'products'
+}
 </script>
 
 <template>
-  <div class="card  gap-2 hover:cursor-pointer">
-    <div class="card-header overflow-hidden ">
+  <nuxt-link v-if="data.id" :to="`/${routeName}/${data.id}`" class="card relative  gap-2 hover:cursor-pointer">
+      <icons-offers v-if="data.price && data.discount" :price="data.price" :discount="data.discount" />
+    <div class="card-header rounded overflow-hidden ">
       <div class="image">
-        <img :src="data.img" class="w-full h-full transition duration-300 ease" :alt="data.name">
+        <img v-if="data.image.url" :src="data.image.url" class="w-full h-full transition duration-300 ease" :alt="data.title">
       </div>
     </div>
     <div :class="`card-body mt-2 ${theme === 'offer' ? 'text-center': ''} `">
-      <nuxt-link :to="data.url" class="content grid gap-2 pt-2">
+      <div  class="content grid gap-2 pt-2">
         <div class="title">
-          <h2 v-if="data.name">{{ data.name }}</h2>
           <h2 v-if="data.title">{{ data.title }}</h2>
         </div>
         <div class="card-text" v-if="price===true">
           <div class="flex gap-1" >
-            <span>{{ data.info }}</span>
+            <span v-if="data.price">{{ data.price.toLocaleString()}}</span>
             <span>تومان</span>
           </div>
         </div>
-      </nuxt-link>
+      </div>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <style scoped>

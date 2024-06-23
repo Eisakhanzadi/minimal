@@ -12,20 +12,20 @@
         <div class="card-header flex flex-col text-nowrap gap-1 lg:gap-2 items-center">
           <div class="image-customer">
             <figure class="w-6 h-6 lg:w-20 lg:h-20">
-              <img :src="item.image" class="w-full h-full rounded-full" alt="user">
+              <img :src="item.image.url" class="w-full h-full rounded-full" alt="user">
               <span class="play w-3.5 h-3.5  md:w-4 md:h-4 lg:w-7 lg:h-7  "></span>
             </figure>
           </div>
           <div class="title text-center">
             <div class="name">{{ item.name }}</div>
-            <div class="area mt-1 lg:mt-3">{{ item.location }}</div>
+            <div class="area mt-1 lg:mt-3">{{ item.city }}</div>
           </div>
           <span class="border-right "></span>
           <span class="border-left "></span>
         </div>
         <div class="card-body  flex items-center ">
           <div class="text-content">
-            <p>{{ item.text }}</p>
+            <p>{{ item.description }}</p>
           </div>
         </div>
       </div>

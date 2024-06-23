@@ -117,9 +117,11 @@ function filterOffers(index){
   instanc?.proxy?.$forceUpdate()
   setTimeout(
       ()=>{
+        console.log(products.value)
         products.value=home.value.categories[index].products
 
-      },1)
+      },1
+  )
 }
 
 </script>
@@ -138,11 +140,11 @@ function filterOffers(index){
         <div
             class="header-offers flex flex-col gap-3 md:flex-row  md:gap-0 md:justify-between md:items-center mb-5 md:mb-10">
           <div class="title"><h3>پیشنهاد مینیمال</h3></div>
-          <div class="filter-offers" v-if="home.categories">
+          <div class="filter-offers" v-if="home.categories.length&&home.categories">
             <navbar-filters @filterActive="filterOffers" :index="activeFilterOffers" :data="home.categories.slice(0,4)" />
           </div>
         </div>
-        <div v-if="home&&products.length" class="body-offers grid grid-cols-12  gap-3 md:gap-10 overflow-hidden">
+        <div v-if="home&&products.length" class="body-offers grid grid-cols-12 p-6 gap-3 md:gap-10 overflow-hidden">
             <card-product :price="true" v-for="(item , index) in home.categories[activeFilterOffers].products" :key="index"
                           class="col-span-6 md:col-span-3 lg:col-span-3   w-full " :data="item" data-aos="fade-up"/>
 

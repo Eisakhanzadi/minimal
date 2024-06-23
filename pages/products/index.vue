@@ -9,6 +9,8 @@ import imageOne from "public/image/offers/9.png";
 import imageTwo from "public/image/offers/10.png";
 import "../../node_modules/multi-range-slider-vue/MultiRangeSliderBlack.css";
 import "../../node_modules/multi-range-slider-vue/MultiRangeSliderBarOnly.css";
+import {useProductsStore} from "~/store/products";
+import calculateOffer from "../../assets/tools/calculateOffer";
 const route = useRoute()
 const router = useRouter()
  const brands=ref(false)
@@ -23,45 +25,41 @@ const breadcrumb = [
 ]
 const sort = [
   {
-    name: "پربازدید ترین",
-    url: ""
+    title: "پربازدید ترین",
+    query:"mostViewedProducts",
   },
   {
-    name: "گران ترین",
-    url: ""
+    title: "گران ترین",
+    query:"topPriceProducts",
   },
   {
-    name: "ارزان ترین",
-    url: ""
+    title: "ارزان ترین",
+    query:"topCheapProducts",
   },
   {
-    name: "جدیدترین",
-    url: ""
+    title: "جدیدترین",
+    query:"lastProducts",
   },
   {
-    name: "تخفیف دار",
-    url: ""
+    title: "تخفیف دار",
+    query:"mostDiscountProducts",
   },
 ]
 const filter = [
   {
     name: "برند",
-    url: "",
     sub: []
   },
   {
     name: "رنگ",
-    url: "",
     sub: []
   },
   {
     name: "مدل",
-    url: "",
     sub: []
   },
   {
     name: "فروشنده",
-    url: "",
     sub: []
   },
 
@@ -89,184 +87,8 @@ const brandItems = [
   },
 
 ]
-const data = [
-  {
-    name: "مبل راحتی تک نقره",
-    info: 1500000,
-    img: imageEight,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره",
-    info: 2000000,
-    img: imageSeven,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره ",
-    info: 5000000,
-    img: imageThree,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره ",
-    info: 3300000,
-    img: imageFour,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره",
-    info: 5600000,
-    img: imageFive,
-    url: "/products/item-5"
-  },
-  {
-    name: " مبل راحتی تک نقره",
-    info: 2500000,
-    img: imageSix,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره",
-    info: 5600000,
-    img: imageOne,
-    url: "/products/item-5"
-  },
-  {
-    name: " مبل راحتی تک نقره",
-    info: 2500000,
-    img: imageTwo,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره",
-    info: 1500000,
-    img: imageEight,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره",
-    info: 2000000,
-    img: imageSeven,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره ",
-    info: 5000000,
-    img: imageThree,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره ",
-    info: 3300000,
-    img: imageFour,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره",
-    info: 5600000,
-    img: imageFive,
-    url: "/products/item-5"
-  },
-  {
-    name: " مبل راحتی تک نقره",
-    info: 2500000,
-    img: imageSix,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره",
-    info: 5600000,
-    img: imageOne,
-    url: "/products/item-5"
-  },
-  {
-    name: " مبل راحتی تک نقره",
-    info: 2500000,
-    img: imageTwo,
-    url: "/products/item-5"
-  },
-  {
-    name: "مبل راحتی تک نقره",
-    info: 5600000,
-    img: imageOne,
-    url: "/products/item-5"
-  },
-  {
-    name: " مبل راحتی تک نقره",
-    info: 2500000,
-    img: imageTwo,
-    url: "/products/item-5"
-  },
-]
-const category = [
-  {
-    name: "مبلمان",
-    url: "",
-    sub: [
-      {
-        name: "سرویس خواب",
-        url: "",
-        sub: []
-      },
-      {
-        name: "صندلی",
-        url: "",
-        sub: []
-      },
-      {
-        name: "آینه",
-        url: "",
-        sub: []
-      },
-      {
-        name: "کنسول",
-        url: "",
-        sub: []
-      },
-    ]
-  },
-  {
-    name: "اکسسوری",
-    url: "",
-    sub: [
-      {
-        name: "مجسمه",
-        url: "",
-        sub: []
-      },
-      {
-        name: "آباژور",
-        url: "",
-        sub: []
-      },
-      {
-        name: "لوستر",
-        url: "",
-        sub: []
-      },
-      {
-        name: "ساعت",
-        url: "",
-        sub: []
-      },
-      {
-        name: "کوسن و شال مبل",
-        url: "",
-        sub: []
-      },
-      {
-        name: "گلدان",
-        url: "",
-        sub: []
-      },
-    ]
-  },
-  {
-    name: "میز",
-    url: "",
-  },
-]
+
+
 const currentPage = ref(1)
 
 function handleFiltersMobile(item) {
@@ -302,10 +124,22 @@ watch(()=>useRoute().fullPath , ()=>{
   brands.value = false
   prices.value = false
 })
+const sortProducts = ref()
+const sortQuery = ref( route.query.sort ||"mostViewedProducts")
+const store = useProductsStore()
+store.fetchProductsData()
+const products = computed(()=>store.getProductsData)
+// sortProducts.value = products.value[sortQuery.value].data
 function setQuery(name){
   const query = {...route.query ,sort:name}
   router.push({path:route.path,query:query})
-  console.log(query)
+  sortQuery.value = null
+  sortProducts.value = null
+  setTimeout(()=> {
+    sortQuery.value = name
+    sortProducts.value = products.value[route.query.sort||sortQuery.value].data
+  }, 1)
+  console.log()
 }
 </script>
 
@@ -331,7 +165,7 @@ function setQuery(name){
           </div>
           <div>
             <ul class="">
-              <categories :data="item" v-for="(item , index) in category" :key="index"/>
+              <categories :data="item" v-for="(item , index) in  products.categories" :key="index"/>
             </ul>
           </div>
         </div>
@@ -340,16 +174,16 @@ function setQuery(name){
             <h4 class="title">محدوده قیمت</h4>
           </div>
           <div class="mt-5">
-            <renge-slider/>
+<!--            <renge-slider/>-->
           </div>
         </div>
       </aside>
       <article class=" col-span-12 md:col-span-8 lg:col-span-9 grid grid-cols-12 gap-x-5 gap-y-5 md:px-2 lg:px-0">
         <section class="col-span-12 grid w-full">
-          <div class="border-b-2 border-[#F6ECF8] pb-4 pt-2 lg:py-3"  data-aos="fade-up">
+          <div class=" border-b-2 border-[#F6ECF8] pb-3 md:pb-2 lg:pb-3 pt-2 lg:py-3"  data-aos="fade-up">
             <div class="  w-full  ">
               <div class=" hidden md:block">
-                <navbar-filters :data="sort" theme="0" filter="product" @set-query="setQuery"/>
+                <navbar-filters :data="sort" index="0" filter="product" @set-query="setQuery"/>
               </div>
               <div class="md:hidden px-5">
                 <navbar-filters-mobile @open-list="handleFiltersMobile" theme="0" filter="product"/>
@@ -357,9 +191,10 @@ function setQuery(name){
             </div>
           </div>
         </section>
-        <section class="col-span-12 grid grid-cols-12 px-5 md:px-0  gap-5">
-          <card-product v-for="(item , index) in data" :price="true" :key="index" class="col-span-6 md:col-span-6 lg:col-span-4 xl:col-span-3"
+        <section class="col-span-12 grid grid-cols-12 px-5 mt-2 md:px-0  gap-7">
+          <card-product v-for="(item , index) in sortProducts" :price="true" :key="index" class="col-span-6 md:col-span-6 lg:col-span-4 xl:col-span-3"
                              :data="item" data-aos="fade-up"/>
+
         </section>
         <section class="pagination col-span-12 flex justify-center px-5 my-16 md:px-0" data-aos="fade-up">
           <vue-awesome-paginate
@@ -387,9 +222,9 @@ function setQuery(name){
           <transition-group name="transition">
             <div class="nav fixed z-20 backdrop-filter backdrop-blur-sm inset-0" @click.self="handleFiltersMobile"
                  v-if="cat">
-              <ul class="w-2/3 px-3 sm:w-1/2 bg-[#F6ECF8] h-full overflow-y-auto ">
+              <ul class="w-2/3 px-3 sm:w-1/2 bg-[#F6ECF8] h-full overflow-y-auto " v-if=" products.categories">
                 <li class="filter-product-title  mt-5 mb-5"><h5>دسته بندی ها :</h5></li>
-                <categories :data="item" v-for="(item , index) in category" :key="index"/>
+                <categories :data="item" v-for="(item , index) in products.categories" :key="index"/>
               </ul>
             </div>
           </transition-group>
